@@ -10,14 +10,14 @@ use Illuminate\Validation\Rules\Password;
 class LoginController extends Controller{
 
     public function get_register(){
-        if(session("username")){
+        if(session("id")){
             return redirect("/index");
         }
         return view("register");
     }
 
     public function post_register(Request $request){
-        if(session("username")){
+        if(session("id")){
             return redirect("/index");
         }
 
@@ -52,14 +52,14 @@ class LoginController extends Controller{
 
 
     public function get_login(){
-        if(session("username")){
+        if(session("id")){
             return redirect("/index");
         }
         return view("login");
     }
     
     public function post_login(Request $request){
-        if(session("username")){
+        if(session("id")){
             return redirect("/index");
         }
         
