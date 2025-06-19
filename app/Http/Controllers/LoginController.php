@@ -46,7 +46,7 @@ class LoginController extends Controller{
         $user->password = password_hash($request->password, PASSWORD_BCRYPT);
         $user->avatar = $percorso_avatar_scelto;
         $user->save();
-        session(["id" => $user->id, "username" => $user->username, "email" => $user->email, "admin" => $user->is_admin]);
+        session(["id" => $user->id, "username" => $user->username, "email" => $user->email, "avatar" => $user->avatar, "admin" => $user->is_admin]);
         return redirect("/index");
     }
 
@@ -73,7 +73,7 @@ class LoginController extends Controller{
             return redirect("/login")->withErrors(["username" => "Username o password errati."])->withInput();
         }
         
-        session(["id" => $user->id, "username" => $user->username, "email" => $user->email, "admin" => $user->is_admin]);
+        session(["id" => $user->id, "username" => $user->username, "email" => $user->email, "avatar" => $user->avatar, "admin" => $user->is_admin]);
         return redirect("/index");
     }
     
