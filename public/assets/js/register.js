@@ -103,7 +103,6 @@ function checkPassword(event) {
     const password = passwordInput.value;
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,30}$/
     if(passwordRegex.test(password)) {
-        console.log('Password valida');
         formGroup.classList.remove('invalid');
         formGroup.classList.add('valid');
         formStatus.password = true;
@@ -120,7 +119,6 @@ function checkConfirmPassword(event) {
     const password = document.getElementById('password').value;
     const confirm_password = confirm_passwordInput.value;
     if(confirm_password === password && confirm_password !== '') {
-        console.log('Conferma password valida');
         formGroup.classList.remove('invalid');
         formGroup.classList.add('valid');
         formStatus.confirmPassword = true;
