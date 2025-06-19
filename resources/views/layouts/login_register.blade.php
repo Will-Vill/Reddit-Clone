@@ -24,6 +24,7 @@
     <main>
         @yield('content')
     </main>
+    <script src="{{ asset('assets/js/toggle-password.js') }}" defer></script>
     @stack('scripts')
 </body>
 </html>
