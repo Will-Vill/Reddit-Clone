@@ -175,27 +175,8 @@ async function checkSignup(event) {
   }
 }
 
-function checkPasswordVisibility(event) {
-    const targetInputId = event.currentTarget.dataset.target;
-    const targetInput = document.getElementById(targetInputId);
-    if (targetInput) {
-            if (targetInput.type === 'password') {
-                targetInput.type = 'text';
-                event.currentTarget.textContent = '🙈';
-            } else {
-                targetInput.type = 'password';
-                event.currentTarget.textContent = '👁️';
-            }
-        }
-}
-
 document.getElementById('username').addEventListener('blur', checkUsername);
 document.getElementById('password').addEventListener('blur', checkPassword);
 document.getElementById('password_confirmation').addEventListener('blur', checkConfirmPassword);
 document.getElementById('email').addEventListener('blur', checkEmail);
 document.getElementById('register-form').addEventListener('submit', checkSignup);
-
-const toggle_passwords = document.querySelectorAll('.toggle-password-visibility');
-for(const toggle_password of toggle_passwords) {
-    toggle_password.addEventListener('click',checkPasswordVisibility);
-}
