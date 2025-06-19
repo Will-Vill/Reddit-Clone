@@ -159,10 +159,9 @@ function checkEmail(event) {
 }
 
 async function checkSignup(event) {
-  // Previene l'invio immediato del form
   event.preventDefault();
 
-  // Esegue tutte le validazioni, comprese quelle asincrone, e attende il loro completamento
+  // Attende che tutti i controlli siano completati
   await Promise.all([
       checkUsername({ currentTarget: document.getElementById('username') }),
       checkPassword({ currentTarget: document.getElementById('password') }),
@@ -170,12 +169,10 @@ async function checkSignup(event) {
       checkEmail({ currentTarget: document.getElementById('email') })
   ]);
 
-  // Ora che tutte le verifiche sono terminate, controlla lo stato finale
-  if (Object.values(formStatus).includes(false)) {
+  if (Object.values(formStatus).includes(false)) { // Se uno dei campi è falso cioè non è valido => Form non valido
     console.log('Form non valido, invio bloccato');
   } else {
     console.log('Form valido, invio in corso...');
-    // Se il form è valido, lo invia programmaticamente
     event.target.submit();
   }
 }
