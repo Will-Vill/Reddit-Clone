@@ -6,10 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiController;
-
-Route::get('/index', function () {
-    return view('index');
-})->name('index');
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return redirect()->route('index');
@@ -24,3 +21,4 @@ Route::post('/register', [LoginController::class, 'post_register']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/check_username', [ApiController::class, 'check_username'])->name('check.username');
 Route::get('/check_email', [ApiController::class, 'check_email'])->name('check.email');
+Route::get('/index', [HomeController::class, 'index'])->name('index');
