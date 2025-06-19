@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Reddit Replica')</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     @stack('styles')
 </head>
@@ -27,6 +28,19 @@
             <button id="tema-toggle" class="pulsante-tema" aria-label="Cambia tema">
               <span class="icona-tema">☀️</span>
             </button>
+            <div class="avatar-container">
+              <img src="{{ session('avatar', asset('assets/images/reddit-logo.png')) }}" alt="Avatar" class="avatar-utente">
+              <div class="menu-utente nascosto">
+                <div class="menu-utente-header">
+                  <img src="{{ session('avatar', asset('assets/images/reddit-logo.png')) }}" alt="Avatar" class="avatar-menu-piccolo">
+                  <span class="nome-utente-display">{{ session('username', 'Utente') }}</span>
+                </div>
+                <div class="menu-utente-body">
+                  <a href="{{-- route('profile') --}}" class="menu-link profilo_utente-link">Profilo Utente</a>
+                  <a href="{{ route('logout') }}" class="menu-link logout-link">Logout</a>
+                </div>
+              </div>
+            </div>
             <div class="menu-mobile-container">
               <button class="pulsante-menu-mobile">☰</button>
               <div class="dropdown-menu nascosto">
