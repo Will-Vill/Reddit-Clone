@@ -305,9 +305,6 @@ async function inviaCommento(event)
   const pulsante = event.currentTarget;
   const sezioneVoti = pulsante.parentNode; // siamo su commento-sezione_voti
   const aggiungiCommento = sezioneVoti.parentNode; // siamo su aggiungi-commento
-  const postFooter = aggiungiCommento.parentNode; // siamo su post-footer
-  const sezioneCommenti = postFooter.parentNode; // siamo su sezione-commenti
-  const post = sezioneCommenti.parentNode; // siamo su post
 
   const testoCommento = aggiungiCommento.querySelector('.inserisci-commento');
   const textArea = testoCommento.value;
@@ -328,9 +325,7 @@ async function inviaCommento(event)
   }
 
   const reddit_id = postElement.dataset.redditId;
-  const db_id = postElement.dataset.dbId;
 
-  const identifierForApi = reddit_id || db_id;
 
   const titoloElement = postElement.querySelector('.titolo-post');
   const titolo = titoloElement ? titoloElement.textContent : (postElement.dataset.titolo || "Titolo non disponibile");
@@ -368,7 +363,6 @@ async function inviaCommento(event)
     const jsonData = await onPostCommentoResponse(response);
     const sezioneCommentiSingolo = document.querySelector('.sezione-commenti-singolo');
     const listaCommentiCaricati = sezioneCommentiSingolo ? sezioneCommentiSingolo.querySelector('.lista-commenti-caricati') : null;
-    const postFooterSingolo = pulsante.closest('.post-footer');
     onPostCommentoJson(jsonData, listaCommentiCaricati, testoCommento, textArea, pulsante);
   } catch(error) {
     console.error("Errore inviaCommento");
@@ -831,13 +825,18 @@ async function fetchGeneraCommentoAI(event) {
   
   pulsante.dataset.textarea = textarea.id || "textarea-" + Date.now();
   if (!textarea.id) textarea.id = pulsante.dataset.textarea;
+
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   
   const formData = new FormData();
   formData.append('titolo', titolo);
 
   try {
-    const response = await fetch("api/gemini.php", { // Nella response c'è la risposta HTTP ricevuta dal php che ha nel corpo una stringa json
+    const response = await fetch("/gemini", { // Nella response c'è la risposta HTTP ricevuta dal php che ha nel corpo una stringa json
       method: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': csrfToken
+      },
       body: formData
     })
     const jsonData = await onGeminiResponse(response); // Nel jsonData c'è l'oggetto javascript 
@@ -1028,47 +1027,6 @@ function mostraPostDatabase(arrayDeiPost, containerDestinazione) {
 
 
 
-
-
-
-function creaElementoSingoloCommentoDB(datiCommentoDB) {
-  const nuovoCommento = document.createElement('div');
-  nuovoCommento.classList.add('commento');
-
-  let dataFormattata = '';
-  if (datiCommentoDB.data_commento) {
-    const dataObj = new Date(datiCommentoDB.data_commento);
-    dataFormattata = dataObj.toLocaleString('it-IT', { 
-      day: '2-digit', 
-      month: '2-digit', 
-      year: 'numeric', 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    });
-  }
-
-  nuovoCommento.innerHTML = `
-    <div class="commento-contenuto">
-      <div class="header-commenti">
-        <div class="avatar-commento">
-          <img src="${escapeHTML(datiCommentoDB.user_avatar || 'assets/images/reddit-logo.png')}" alt="Avatar utente">
-        </div>
-        <div class="commenti-info">
-          <h3 class="autore-commento">${escapeHTML(datiCommentoDB.username || 'Utente')}</h3>
-          <span class="data-commento-inline">${dataFormattata}</span>
-          <p class="testo-commento"></p>
-        </div>
-      </div>
-    </div>
-  `;
-
-  nuovoCommento.querySelector(".testo-commento").textContent = datiCommentoDB.contenuto;
-  
-  return nuovoCommento;
-}
-
-
-
 function onJsonPostDatabase(risultatoAPI, container) {
     if (risultatoAPI.success && risultatoAPI.data) {
       mostraPostDatabase(risultatoAPI.data, container);
@@ -1147,7 +1105,7 @@ async function caricaPostInizialiDB() {
     return;
   }
 
-  sezioneMain.innerHTML = '<p class="caricamento-messaggio">Caricamento dei post...</p>';
+  //sezioneMain.innerHTML = '<p class="caricamento-messaggio">Caricamento dei post...</p>';
 
   try {
     const response = await fetch("api/caricaPostIniziali.php");
