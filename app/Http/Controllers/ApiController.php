@@ -62,4 +62,36 @@ class ApiController extends Controller
             return response()->json(['error' => 'Failed to get token'], 500);
         }
     }
+
+    public function fetchGemini(Request $request){
+        $gemini_key = env('GEMINI_KEY');
+
+        $titolo = $request->input('titolo', 'Titolo test');
+
+        $prompt = "Genera un commento breve e pertinente per un post di Reddit intitolato \"" . $titolo . 
+          "\". Il commento deve essere informale, cordiale e non più lungo di 2 frasi.";
+
+        $request_data = [
+            'contents' => [
+                [
+                    'parts' => [
+                        [
+                            'text' => $prompt
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $ch = curl_init("https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={$gemini_key}");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request_data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
+    }
 }

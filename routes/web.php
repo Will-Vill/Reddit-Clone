@@ -24,4 +24,5 @@ Route::get('/check_email', [ApiController::class, 'check_email'])->name('check.e
 Route::get('/index', [HomeController::class, 'index'])->name('index');
 
 // Rotta per reddit e gemini api
-Route::post('/reddit', [ApiController::class, 'fetchRedditPost'])->name('reddit');
+Route::post('/reddit', [ApiController::class, 'fetchRedditPost']);
+Route::post('/gemini', [ApiController::class, 'fetchGemini']);
