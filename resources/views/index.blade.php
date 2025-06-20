@@ -14,37 +14,37 @@
           <span class="icona-gaming">
             <img src="{{ asset('assets/images/gaming.png') }}" alt="Gaming">
           </span>
-          <a href="#" data-subreddit="gaming">Gaming</a>
+          <a href="#" data-subreddit="gaming" class="subreddit-link">Gaming</a>
         </h5>
         <h5 class="link-sport">
           <span class="icona-sport">
             <img src="{{ asset('assets/images/sports.png') }}" alt="Sport">
           </span>
-          <a href="#" data-subreddit="sports">Sport</a>
+          <a href="#" data-subreddit="sports" class="subreddit-link">Sport</a>
         </h5>
         <h5 class="link-anime">
           <span class="icona-anime">
             <img src="{{ asset('assets/images/anime.png') }}" alt="Anime">
           </span>
-          <a href="#" data-subreddit="anime">Anime</a>
+          <a href="#" data-subreddit="anime" class="subreddit-link">Anime</a>
         </h5>
         <h5 class="link-film_e_serie">
           <span class="icona-film_e_serie">
             <img src="{{ asset('assets/images/movies.png') }}" alt="Film">
           </span>
-          <a href="#" data-subreddit="movies">Film e serie</a>
+          <a href="#" data-subreddit="movies" class="subreddit-link">Film e serie</a>
         </h5>
         <h5 class="link-musica">
           <span class="icona-musica">
             <img src="{{ asset('assets/images/Music.png') }}" alt="Musica">
           </span>
-          <a href="#" data-subreddit="music">Musica</a>
+          <a href="#" data-subreddit="music" class="subreddit-link">Musica</a>
         </h5>
         <h5 class="link-scienze">
           <span class="icona-scienze">
             <img src="{{ asset('assets/images/science.png') }}" alt="Scienze">
           </span>
-          <a href="#" data-subreddit="science">Scienze</a>
+          <a href="#" data-subreddit="science" class="subreddit-link">Scienze</a>
         </h5>
       </div>
       <div id="div-informazioni">
@@ -77,7 +77,7 @@
           <h3>Community Popolari</h3>
           <ul class="lista-community">
             <li>
-              <a href="#" data-subreddit="gaming">
+              <a href="#" data-subreddit="gaming" class="subreddit-link">
                 <div class="avatar-community">
                   <img src="{{ asset('assets/images/gaming.png') }}" alt="Gaming">
                 </div>
@@ -88,7 +88,7 @@
               </a>
             </li>
             <li>
-              <a href="#" data-subreddit="sports">
+              <a href="#" data-subreddit="sports" class="subreddit-link">
                 <div class="avatar-community">
                   <img src="{{ asset('assets/images/sports.png') }}" alt="Sport">
                 </div>
@@ -99,7 +99,7 @@
               </a>
             </li>
             <li>
-              <a href="#" data-subreddit="anime">
+              <a href="#" data-subreddit="anime" class="subreddit-link">
                 <div class="avatar-community">
                   <img src="{{ asset('assets/images/anime.png') }}" alt="Anime">
                 </div>
@@ -110,7 +110,7 @@
               </a>
             </li>
             <li>
-                <a href="#" data-subreddit="movies">
+                <a href="#" data-subreddit="movies" class="subreddit-link">
                   <div class="avatar-community">
                     <img src="{{ asset('assets/images/movies.png') }}" alt="Film">
                   </div>
@@ -121,7 +121,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" data-subreddit="Music">
+                <a href="#" data-subreddit="Music" class="subreddit-link">
                   <div class="avatar-community">
                     <img src="{{ asset('assets/images/Music.png') }}" alt="Musica">
                   </div>
