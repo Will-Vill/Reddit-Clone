@@ -22,3 +22,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/check_username', [ApiController::class, 'check_username'])->name('check.username');
 Route::get('/check_email', [ApiController::class, 'check_email'])->name('check.email');
 Route::get('/index', [HomeController::class, 'index'])->name('index');
+
+// Rotta per reddit e gemini api
+Route::post('/reddit', [ApiController::class, 'fetchRedditPost'])->name('reddit');
