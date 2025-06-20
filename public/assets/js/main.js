@@ -1,24 +1,7 @@
   // Sezione main per index.php
   if (document.querySelector('#sezione-main-index')) {
-    inizializzaPaginaPrincipale();
     caricaPostInizialiDB();
   }
-
-  function inizializzaPaginaPrincipale() {
-  const gamingLink = document.querySelector('.gaming-link a');
-  const sportLink = document.querySelector('.link-sport a');
-  const animeLink = document.querySelector('.link-anime a');
-  const filmLink = document.querySelector('.link-film_e_serie a');
-  const musicaLink = document.querySelector('.link-musica a');
-  const scienzeLink = document.querySelector('.link-scienze a');
-  
-  if (gamingLink) gamingLink.addEventListener('click', fetchRedditPost);
-  if (sportLink) sportLink.addEventListener('click', fetchRedditPost);
-  if (animeLink) animeLink.addEventListener('click', fetchRedditPost);
-  if (filmLink) filmLink.addEventListener('click', fetchRedditPost); 
-  if (musicaLink) musicaLink.addEventListener('click', fetchRedditPost);
-  if (scienzeLink) scienzeLink.addEventListener('click', fetchRedditPost);
-}
 
 
 // Parte degli upvote e downvote
@@ -747,14 +730,19 @@ async function fetchRedditPost(event)
   }
   sezioneMain.innerHTML = '<p class="caricamento-messaggio">Caricamento dei post da r/' + subreddit + '...</p>';
 
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
   const formData = new FormData();
   formData.append('subreddit',subreddit)
 
 
   try {
-    const response = await fetch("api/reddit.php", {
+    const response = await fetch("/reddit", {
       method: 'POST',
-      body: formData
+      headers: {
+        'X-CSRF-TOKEN': csrfToken
+      },
+      body: formData,
     })
     const jsonData = await onRedditResponse(response);
     const risultatoAPI = onRedditJson(jsonData);
@@ -768,8 +756,8 @@ async function fetchRedditPost(event)
   }
 }
 
-const linksCommunityPopolari = document.querySelectorAll('.lista-community a');
-for (const link of linksCommunityPopolari) {
+const linkSubreddit = document.querySelectorAll('.subreddit-link');
+for (const link of linkSubreddit) {
   link.addEventListener('click', fetchRedditPost);
 }
 
