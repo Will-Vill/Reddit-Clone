@@ -65,6 +65,8 @@ async function Upvote(event)
   const thumbnail = post.dataset.thumbnail || '';
   const contenuto = post.dataset.contenuto || '';
 
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
   const formData = new FormData();
   formData.append('reddit_id', reddit_id);
   formData.append('titolo', titolo);
@@ -80,8 +82,11 @@ async function Upvote(event)
 
 
   try {
-    const response = await fetch("api/post_voto.php", {
+    const response = await fetch("/post_voto", {
       method: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': csrfToken
+      },
       body: formData
     })
     const jsonData = await onPostVotoResponse(response);
@@ -138,6 +143,8 @@ async function Downvote(event)
   const thumbnail = post.dataset.thumbnail || '';
   const contenuto = post.dataset.contenuto || '';
 
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
   const formData = new FormData();
   formData.append('reddit_id', reddit_id);
   formData.append('titolo', titolo);
@@ -152,8 +159,11 @@ async function Downvote(event)
   pulsante.disabled = true;
 
   try {
-    const response = await fetch("api/post_voto.php", {
+    const response = await fetch("/post_voto", {
       method: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': csrfToken
+      },
       body: formData
     })
     const jsonData = await onPostVotoResponse(response);
