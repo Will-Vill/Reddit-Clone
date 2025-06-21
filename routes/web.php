@@ -26,3 +26,6 @@ Route::get('/index', [HomeController::class, 'index'])->name('index');
 // Rotta per reddit e gemini api
 Route::post('/reddit', [ApiController::class, 'fetchRedditPost']);
 Route::post('/gemini', [ApiController::class, 'fetchGemini']);
+
+// Rotta per post_voto
+Route::post('/post_voto', [ApiController::class, 'postVoto']);
