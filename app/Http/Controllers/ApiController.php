@@ -196,4 +196,34 @@ class ApiController extends Controller
 
         return response()->json(['success' => true, 'nuovo_voto_post' => $nuovo_voto_post, 'flag_salvataggio_post' => $flag_salvataggio_post, 'nuovo_tipo_voto_utente' => $tipo_voto_utente]);
     }
+
+    public function postInizialiDB(){
+        if(!session('id')){
+            return response()->json(['success' => false, 'error' => "Utente non autenticato"], 401);
+        }
+
+        $user_id = session('id');
+
+        $votoSubquery = DB::table("voti_utenti as v")
+                            ->select('v.tipo_voto')
+                            ->where('v.user_id', $user_id)
+                            ->whereColumn('v.post_id', 'p.id')
+                            ->limit(1);
+        
+        
+        $posts = DB::table("post as p")
+                    ->select('p.id as post_db_id', 'p.reddit_id', 'p.subreddit', 'p.titolo', 'p.autore', 
+                    'p.contenuto as post_contenuto', 'p.immagine_path', 'p.url', 'p.thumbnail', 'p.voto',
+                    'p.tipo_contenuto', 'p.data_salvataggio'
+                    )
+                    ->selectSub($votoSubquery, 'tipo_voto_utente')
+                    ->orderBy('p.voto', 'desc')
+                    ->orderBy('p.data_salvataggio', 'desc')
+                    ->limit(30)
+                    ->get();
+
+        
+        
+        return response()->json(['success' => true, 'posts' => $posts]);
+    }
 }
