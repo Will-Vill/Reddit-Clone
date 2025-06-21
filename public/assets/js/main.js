@@ -197,7 +197,7 @@ function onPostVotoJson(json, pulsante) {
   const titoloLinkElement = post.querySelector('.post-info .titolo-post-link');
 
   if (json.success && json.nuovo_voto_post !== undefined && json.nuovo_tipo_voto_utente !== undefined) {
-    console.log("Voto aggiornato con successo. Nuovo punteggio:", "Flag_salvataggio_post: ", json.flag_salvataggio_post , json.nuovo_voto_post, "Nuovo tipo voto utente: ", json.nuovo_tipo_voto_utente);
+    console.log("Voto aggiornato con successo. Nuovo punteggio: ", json.nuovo_voto_post, "Flag_salvataggio_post: ", json.flag_salvataggio_post, "Nuovo tipo voto utente: ", json.nuovo_tipo_voto_utente);
 
     if (contatore) {
       contatore.textContent = json.nuovo_voto_post;
@@ -1115,10 +1115,10 @@ async function caricaPostInizialiDB() {
     return;
   }
 
-  //sezioneMain.innerHTML = '<p class="caricamento-messaggio">Caricamento dei post...</p>';
+  sezioneMain.innerHTML = '<p class="caricamento-messaggio">Caricamento dei post...</p>';
 
   try {
-    const response = await fetch("api/caricaPostIniziali.php");
+    const response = await fetch("/post_iniziali");
     const risultatoAPI = await postInizialionResponse(response);
     postInizialionJson(risultatoAPI,sezioneMain);
 

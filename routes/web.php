@@ -29,3 +29,6 @@ Route::post('/gemini', [ApiController::class, 'fetchGemini']);
 
 // Rotta per post_voto
 Route::post('/post_voto', [ApiController::class, 'postVoto']);
+
+// Rotta per postIniziali
+Route::get('/post_iniziali', [ApiController::class, 'postInizialiDB']);
