@@ -168,8 +168,8 @@ class ApiController extends Controller
             }
             $tipo_contenuto = $immagine_path ? 'image' : ($url ? 'link' : 'text');
 
-            $inserisci_query = DB::insert('INSERT INTO post (reddit_id, subreddit, titolo, autore, contenuto, tipo_contenuto, url, thumbnail, voto, immagine_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-            [$reddit_id, $subreddit, $titolo, $autore, $contenuto, $tipo_contenuto, $url, $thumbnail, $voto_attuale_post, $immagine_path]);
+            $inserisci_query = DB::insert('INSERT INTO post (user_id, reddit_id, subreddit, titolo, autore, contenuto, tipo_contenuto, url, thumbnail, voto, immagine_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+            [$user_id, $reddit_id, $subreddit, $titolo, $autore, $contenuto, $tipo_contenuto, $url, $thumbnail, $voto_attuale_post, $immagine_path]);
 
             if($inserisci_query){
                 $post_id = DB::getPdo()->lastInsertId();
