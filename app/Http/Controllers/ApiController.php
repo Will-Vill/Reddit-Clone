@@ -197,6 +197,23 @@ class ApiController extends Controller
         return response()->json(['success' => true, 'nuovo_voto_post' => $nuovo_voto_post, 'flag_salvataggio_post' => $flag_salvataggio_post, 'nuovo_tipo_voto_utente' => $tipo_voto_utente]);
     }
 
+    private function recuperaPostQuery($user_id) {
+
+        $votoSubquery = DB::table("voti_utenti as v")
+                            ->select('v.tipo_voto')
+                            ->where('v.user_id', $user_id)
+                            ->whereColumn('v.post_id', 'p.id')
+                            ->limit(1);
+
+        return DB::table("post as p")
+            ->select(
+                'p.id as post_db_id', 'p.reddit_id', 'p.subreddit', 'p.titolo', 'p.autore',
+                'p.contenuto as post_contenuto', 'p.immagine_path', 'p.url', 'p.thumbnail', 'p.voto',
+                'p.tipo_contenuto', 'p.data_salvataggio'
+            )
+            ->selectSub($votoSubquery, 'tipo_voto_utente');
+    }
+
     public function postInizialiDB(){
         if(!session('id')){
             return response()->json(['success' => false, 'error' => "Utente non autenticato"], 401);
@@ -204,19 +221,7 @@ class ApiController extends Controller
 
         $user_id = session('id');
 
-        $votoSubquery = DB::table("voti_utenti as v")
-                            ->select('v.tipo_voto')
-                            ->where('v.user_id', $user_id)
-                            ->whereColumn('v.post_id', 'p.id')
-                            ->limit(1);
-        
-        
-        $posts = DB::table("post as p")
-                    ->select('p.id as post_db_id', 'p.reddit_id', 'p.subreddit', 'p.titolo', 'p.autore', 
-                    'p.contenuto as post_contenuto', 'p.immagine_path', 'p.url', 'p.thumbnail', 'p.voto',
-                    'p.tipo_contenuto', 'p.data_salvataggio'
-                    )
-                    ->selectSub($votoSubquery, 'tipo_voto_utente')
+        $posts = $this->recuperaPostQuery($user_id)
                     ->orderBy('p.voto', 'desc')
                     ->orderBy('p.data_salvataggio', 'desc')
                     ->limit(30)
@@ -225,5 +230,33 @@ class ApiController extends Controller
         
         
         return response()->json(['success' => true, 'posts' => $posts]);
+    }
+
+    public function postUtenti(){
+        if(!session('id')){
+            return response()->json(['success' => false, 'error' => "Utente non autenticato"], 401);
+        }
+
+        $id_post_commentati = DB::table('commenti')
+                                ->select('post_id')
+                                ->where('user_id', $user_id);
+
+        
+        $id_post_votati = DB::table('voti_utenti')
+                            ->select('post_id')
+                            ->where('user_id', $user_id);
+
+        
+        $posts = $this->recuperaPostQuery($user_id)
+                    ->where('p.user_id', $user_id)
+                    ->orWhereIn('p.id', $id_post_commentati) // controlla se il valore di p.id è presente nella lista degli id_post_commentati
+                    ->orWhereIn('p.id', $id_post_votati) // controlla se il valore di p.id è presente nella lista degli id_post_votati
+                    ->distinct()
+                    ->orderBy('p.data_salvataggio', 'desc')
+                    ->orderBy('p.id', 'desc')
+                    ->get();
+        
+        return response()->json(['success' => true, 'data' => $posts]);
+                    
     }
 }
