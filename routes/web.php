@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return redirect()->route('index');
@@ -32,3 +33,6 @@ Route::post('/post_voto', [ApiController::class, 'postVoto']);
 
 // Rotta per postIniziali
 Route::get('/post_iniziali', [ApiController::class, 'postInizialiDB']);
+
+// Rotta per postSingolo
+Route::get('/post_singolo/reddit/{reddit_id}', [PostController::class, 'recuperaPostSingolo']);
