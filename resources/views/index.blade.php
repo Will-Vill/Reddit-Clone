@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('body-class', 'index-page')
+
 @section('title', 'Reddit Replica - Home')
 
 @section('content')
