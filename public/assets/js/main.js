@@ -219,7 +219,7 @@ function onPostVotoJson(json, pulsante) {
               const redditIdDelPost = post.dataset.redditId;
               if (redditIdDelPost) {
                  if (tipoVotoNumerico === 1 || tipoVotoNumerico === -1) {
-                     titoloLinkElement.href = `post_singolo.php?reddit_id=${encodeURIComponent(redditIdDelPost)}`;
+                     titoloLinkElement.href = `/post_singolo/reddit/${encodeURIComponent(redditIdDelPost)}`;
                      titoloLinkElement.classList.remove('non-cliccabile');
                  } else {
                      titoloLinkElement.href = "#";
@@ -906,9 +906,7 @@ function mostraPostDatabase(arrayDeiPost, containerDestinazione) {
 
         const titoloLinkDB = document.createElement("a");
         if (redditIdOriginale) {
-            titoloLinkDB.href = `post_singolo.php?reddit_id=${encodeURIComponent(redditIdOriginale)}`;
-        } else if (idPerLink) {
-            titoloLinkDB.href = `post_singolo.php?db_id=${encodeURIComponent(idPerLink)}`;
+            titoloLinkDB.href = `/post_singolo/reddit/${encodeURIComponent(redditIdOriginale)}`;
         } else {
             titoloLinkDB.href = '#';
             console.warn("Nessun ID disponibile per il link del post:", datiPostSingolo);
@@ -1193,7 +1191,7 @@ function caricaPostRecenti(data, pulsante) {
       const li = document.createElement('li');
       li.className = 'post-recenti-item';
       li.innerHTML = `
-        <a href="post_singolo.php?reddit_id=${encodeURIComponent(post.reddit_id)}" class="titolo-post-recenti"</a>
+        <a href="/post_singolo/reddit/${encodeURIComponent(post.reddit_id)}" class="titolo-post-recenti"></a>
         <div class="post-recente-info">
           <p class="post-recente-titolo">${escapeHTML(post.titolo)}</p>
           <p class="post-recente-subreddit">r/${escapeHTML(post.subreddit)}</p>
