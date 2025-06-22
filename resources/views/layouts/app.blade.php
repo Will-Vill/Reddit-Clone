@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     @stack('styles')
 </head>
-<body class="app-page">
+<body class="app-page @yield('body-class')">
     <header>
         <div class="header-container">
           <div class="header-sinistra">
@@ -30,10 +30,10 @@
               <span class="icona-tema">☀️</span>
             </button>
             <div class="avatar-container">
-              <img src="{{ session('avatar', asset('assets/images/reddit-logo.png')) }}" alt="Avatar" class="avatar-utente">
+              <img src="{{ asset(session('avatar', 'assets/images/reddit-logo.png')) }}" alt="Avatar" class="avatar-utente">
               <div class="menu-utente nascosto">
                 <div class="menu-utente-header">
-                  <img src="{{ session('avatar', asset('assets/images/reddit-logo.png')) }}" alt="Avatar" class="avatar-menu-piccolo">
+                  <img src="{{ asset(session('avatar', 'assets/images/reddit-logo.png')) }}" alt="Avatar" class="avatar-menu-piccolo">
                   <span class="nome-utente-display">{{ session('username', 'Utente') }}</span>
                 </div>
                 <div class="menu-utente-body">
@@ -55,6 +55,18 @@
     <main>
         @yield('content')
     </main>
+
+    <footer id="footer-telefono">
+        <p>Sito creato da William Villari</p>
+    </footer>
+    <footer id="footer-pagina_principale">
+        <p>Sito creato da<br><i>William Villari</i></p>
+    </footer>
+    <div id="immagine-modale" class="modale-immagine nascosto">
+        <span class="chiudi-modale">&times;</span>
+        <img class="contenuto-modale" id="img-modale">
+        <div class="didascalia-modale"></div>
+    </div>
     @stack('scripts')
 </body>
 </html>
