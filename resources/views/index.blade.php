@@ -150,6 +150,9 @@
   </div>
 @endsection
 
+@section('footer')
+@endsection
+
 @push('scripts')
 <script src="{{ asset('assets/js/main.js') }}" defer></script>
 @endpush
