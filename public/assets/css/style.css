@@ -2465,6 +2465,15 @@ body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
         max-width: 100%;
     }
 
+    .index-page .container {
+        overflow: visible;
+        height: auto;
+    }
+    .index-page .contenuto-destro {
+        overflow-y: visible;
+        height: auto;
+    }
+
     .categorie {
         width: 100%;
         height: auto;
