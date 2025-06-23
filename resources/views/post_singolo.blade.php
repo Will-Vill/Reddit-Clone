@@ -9,6 +9,7 @@
     <div class="contenuto-destro">
         <section class="sezione-main">
             <article class="post post-singolo" 
+                     data-db-id="{{ $posts->id }}"
                      data-reddit-id="{{ $posts->reddit_id }}"
                      data-autore="{{ $posts->autore }}"
                      data-subreddit="{{ $posts->subreddit }}"
@@ -69,8 +70,14 @@
                 </div>
             </article>
 
-            <section class="sezione-commenti-singolo">
-                <h4 class="titolo-commenti">Commenti ({{ $commenti->count() }})</h4>
+            
+            <div class="toggle-commenti-container">
+                <button class="toggle-commenti">Nascondi commenti</button>
+            </div>
+            <section class="sezione-commenti sezione-commenti-singolo">
+                <h4 class="titolo-commenti">
+                    Commenti (<span id="contatore-commenti">{{ $commenti->count() }}</span>)
+                </h4>
                 <div class="lista-commenti-caricati">
                     @forelse ($commenti as $commento)
                         <div class="commento">
@@ -95,7 +102,7 @@
                 <div class="post-footer">
                     <div class="aggiungi-commento">
                         <div class="inserisci-commento-container">
-                            <textarea class="inserisci-commento" placeholder="Scrivi un commento..."></textarea>
+                            <textarea class="inserisci-commento" placeholder="Scrivi un commento..." maxlength="300"></textarea>
                         </div>
                         <div class="commento-sezione_voti">
                             <button class="pulsante_invia-commento">Invia Commento</button>
