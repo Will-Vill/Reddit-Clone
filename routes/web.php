@@ -42,3 +42,7 @@ Route::get('/post_utenti', [PostController::class, 'postUtenti']);
 
 // Rotta per postCommenti
 Route::post('/post_commenti', [PostController::class, 'postCommenti']);
+
+// Rotta per postRecenti
+
+Route::get('/post_recenti', [PostController::class, 'postRecenti']);
