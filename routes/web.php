@@ -29,10 +29,16 @@ Route::post('/reddit', [ApiController::class, 'fetchRedditPost']);
 Route::post('/gemini', [ApiController::class, 'fetchGemini']);
 
 // Rotta per post_voto
-Route::post('/post_voto', [ApiController::class, 'postVoto']);
+Route::post('/post_voto', [PostController::class, 'postVoto']);
 
 // Rotta per postIniziali
-Route::get('/post_iniziali', [ApiController::class, 'postInizialiDB']);
+Route::get('/post_iniziali', [PostController::class, 'postInizialiDB']);
 
 // Rotta per postSingolo
 Route::get('/post_singolo/reddit/{reddit_id}', [PostController::class, 'recuperaPostSingolo']);
+
+// Rotta per postUtenti
+Route::get('/post_utenti', [PostController::class, 'postUtenti']);
+
+// Rotta per postCommenti
+Route::post('/post_commenti', [PostController::class, 'postCommenti']);
