@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -249,6 +250,25 @@ class PostController extends Controller
         }
 
         return response()->json(['success' => $inserisci_commento, 'username' => $username, 'user_avatar' => $user_avatar, 'data_commento' => $data_commento]);
+    }
+
+
+    public function postRecenti(Request $request){
+        if(!session('id')){
+            return response()->json(['success' => false, 'error' => "Utente non autenticato"], 401);
+        }
+
+        $posts = DB::table('post')
+                    ->select('reddit_id', 'titolo', 'subreddit')
+                    ->orderBy('data_salvataggio', 'desc')
+                    ->limit(5)
+                    ->get();
+
+        if($posts->isEmpty()) {
+            return response()->json(['success' => false, 'error' => "Nessun post recente trovato"], 404);
+        }
+
+        return response()->json(['success' => true, 'post' => $posts]);
     }
 
 
