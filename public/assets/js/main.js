@@ -334,40 +334,25 @@ async function inviaCommento(event)
     return;
   }
 
-  const reddit_id = postElement.dataset.redditId;
+  const postId = postElement.dataset.dbId || '';
 
-
-  const titoloElement = postElement.querySelector('.titolo-post');
-  const titolo = titoloElement ? titoloElement.textContent : (postElement.dataset.titolo || "Titolo non disponibile");
-  const autore = postElement.dataset.autore;
-  const subreddit = postElement.dataset.subreddit;
-  const url = postElement.dataset.url || '';
-  const thumbnail = postElement.dataset.thumbnail || '';
-  const contenutoDelPost = postElement.dataset.contenuto || '';
-  const contatoreVotoElement = postElement.querySelector('.contatore-voto');
-  const votoDelPost = contatoreVotoElement ? contatoreVotoElement.textContent : (postElement.dataset.voto || '0');
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
   const formData = new FormData();
   formData.append('commento', textArea);
-  formData.append('reddit_id', reddit_id);
-  formData.append('titolo', titolo);
-  formData.append('autore', autore);
-  formData.append('subreddit', subreddit);
-  formData.append('url', url);
-  formData.append('thumbnail', thumbnail);
-  formData.append('contenuto', contenutoDelPost);
-  formData.append('voto', votoDelPost);
+  formData.append('post_id', postId);
   
   pulsante.disabled = true;
   pulsante.textContent = 'Invio in corso...';
 
 
 
-
-
   try {
-    const response = await fetch("api/post_commento.php", {
+    const response = await fetch("/post_commenti", {
       method: 'POST',
+      headers: {
+        'X-CSRF-TOKEN': csrfToken
+    },
       body: formData
     })
     const jsonData = await onPostCommentoResponse(response);
@@ -393,14 +378,26 @@ function onPostCommentoJson(json, listaCommentiContainer, testoCommento, textAre
     const nuovoCommento = document.createElement('div');
     nuovoCommento.classList.add('commento');
 
+    let avatarPath;
+    if (json.user_avatar) {
+        if (json.user_avatar.includes('/')) {
+            avatarPath = json.user_avatar.startsWith('/') ? json.user_avatar : '/' + json.user_avatar;
+        } else {
+            avatarPath = `/avatar-utenti/${json.user_avatar}`;
+        }
+    } else {
+        avatarPath = '/assets/images/reddit-logo.png';
+    }
+
     nuovoCommento.innerHTML = `
       <div class="commento-contenuto">
         <div class="header-commenti">
           <div class="avatar-commento">
-            <img src="${json.user_avatar || 'assets/images/reddit-logo.png'}" alt="Avatar utente">
+            <img src="${avatarPath}" alt="Avatar utente">
           </div>
           <div class="commenti-info">
             <h3 class="autore-commento">${json.username || 'Tu'}</h3>
+            <span class="data-commento-inline">${json.data_commento || ''}</span>
             <p class="testo-commento"></p>
           </div>
         </div>
@@ -414,7 +411,12 @@ function onPostCommentoJson(json, listaCommentiContainer, testoCommento, textAre
         if (nessunCommentoMsg) {
             nessunCommentoMsg.remove();
         }
-        listaCommentiContainer.appendChild(nuovoCommento); 
+        listaCommentiContainer.appendChild(nuovoCommento);
+        
+        const contatore = document.getElementById('contatore-commenti');
+        if (contatore) {
+            contatore.textContent = listaCommentiContainer.querySelectorAll('.commento').length;
+        }
     } else {
         console.warn("Contenitore lista commenti (listaCommentiContainer) non trovato per aggiornare l'UI.");
     }
@@ -1060,7 +1062,7 @@ function PostDatabaseResponse(response) {
 
 async function PostDatabase(container) {
   try {
-    const response = await fetch("api/Recupera_Post_Commenti_DB.php");
+    const response = await fetch("/post_utenti");
     const risultatoAPI = await PostDatabaseResponse(response);
     onJsonPostDatabase(risultatoAPI,container);
   } catch(error) {
