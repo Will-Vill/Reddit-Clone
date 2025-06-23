@@ -1164,7 +1164,7 @@ async function fetchPostRecenti(event) {
   const pulsante = event.currentTarget;
 
   try {
-    const response = await fetch("api/Recupera_post_recenti.php");
+    const response = await fetch("/post_recenti");
     const jsonData = await response.json();
     caricaPostRecenti(jsonData, pulsante);
   } catch(error) {
@@ -1193,9 +1193,10 @@ function caricaPostRecenti(data, pulsante) {
       const li = document.createElement('li');
       li.className = 'post-recenti-item';
       li.innerHTML = `
-        <a href="/post_singolo/reddit/${encodeURIComponent(post.reddit_id)}" class="titolo-post-recenti"></a>
+        <a href="/post_singolo/reddit/${encodeURIComponent(post.reddit_id)}" class="titolo-post-recenti">
+          <span class="post-recente-titolo">${escapeHTML(post.titolo)}</span>
+        </a>
         <div class="post-recente-info">
-          <p class="post-recente-titolo">${escapeHTML(post.titolo)}</p>
           <p class="post-recente-subreddit">r/${escapeHTML(post.subreddit)}</p>
         </div>
       `;
