@@ -986,13 +986,14 @@ body.tema-chiaro .downvote:hover {
 
 .header-commenti {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 5px;
     flex-wrap: nowrap;
 }
 
 .avatar-commento {
-    flex-shrink: 0; 
+    flex-shrink: 0;
+    margin-right: 10px;
 }
 
 .avatar-commento img {
@@ -1011,7 +1012,9 @@ body.tema-chiaro .downvote:hover {
 }
 
 .commenti-info {
-    max-width: 600px;
+    flex-grow: 1;
+    min-width: 0;
+    word-break: break-word;
 }
 
 .autore-commento {
