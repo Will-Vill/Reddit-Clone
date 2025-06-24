@@ -11,8 +11,8 @@ class PostController extends Controller
 {
     public function recuperaPostSingolo($reddit_id){
         if(!session('id')){
-             error_log("Accesso non autorizzato al post singolo: utente non autenticato.");
-             return redirect('/login');
+            error_log("Accesso non autorizzato al post singolo: utente non autenticato.");
+            return redirect('/login');
         }
 
         $user_id = session('id');
