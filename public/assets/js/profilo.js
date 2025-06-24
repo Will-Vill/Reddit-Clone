@@ -183,10 +183,14 @@ async function checkDati(event) {
             formData.delete('password');
             formData.delete('conferma_password');
         }
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         try {
-            const response = await fetch("api/aggiorna_profilo.php", {
+            const response = await fetch("/aggiorna_profilo", {
             method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
             body: formData
         })
         const jsonData = await checkDatiOnResponse(response);
@@ -194,22 +198,27 @@ async function checkDati(event) {
         } catch(error) {
             console.error('Errore durante l\'invio del form:', error);
             if (messaggioAggiornamento) {
-                messaggioAggiornamento.textContent = 'Errore: ' + (error.message || 'Impossibile completare la richiesta.');
+                let errorMessage = 'Si è verificato un errore imprevisto.';
+                if (error.response && error.response.errors) {
+                    // Estrai e unisci tutti i messaggi di errore
+                    errorMessage = Object.values(error.response.errors).flat().join('\n');
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                messaggioAggiornamento.textContent = errorMessage;
                 messaggioAggiornamento.className = 'messaggio-aggiornamento error';
             }
-        }
-    } else {
-        if (messaggioAggiornamento) {
-            messaggioAggiornamento.textContent = 'Nessuna modifica rilevata.';
-            messaggioAggiornamento.className = 'messaggio-aggiornamento neutral';
         }
     }
 }
 
 
-function checkDatiOnResponse(response) {
+async function checkDatiOnResponse(response) {
     if (!response.ok) {
-        throw new Error('Errore nella risposta del server: ' + response.statusText);
+        const errorData = await response.json();
+        const error = new Error('Errore di validazione dal server.');
+        error.response = errorData;
+        throw error;
     }
     return response.json();
 }
@@ -263,7 +272,7 @@ function aggiornaProfilo(data) {
 
 
 function redirectToIndex() {
-    window.location.href = 'index.php';
+    window.location.href = '/index';
 }
 
 
