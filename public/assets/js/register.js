@@ -16,7 +16,7 @@ function checkUsernameDB(json) {
     let feedbackSpan = formGroup.querySelector('.feedback-message');
 
     const isAvailable = !json.exists;
-    formStatus.username = isAvailable;  // se è vero vuol dire che l'username è disponibile (da javascript era false cioè non esiste)
+    formStatus.username = isAvailable;  // se è vero vuol dire che l'username è disponibile (da php era false cioè non esiste)
 
     if (isAvailable) {
         formGroup.classList.remove('invalid');
@@ -43,7 +43,7 @@ function checkEmailDB(json) {
     let feedbackSpan = formGroup.querySelector('.feedback-message');
 
     const isAvailable = !json.exists;
-    formStatus.email = isAvailable;  // se è vero vuol dire che l'email è disponibile (da javascript era false cioè non esiste)
+    formStatus.email = isAvailable;  // se è vero vuol dire che l'email è disponibile (da php era false cioè non esiste)
 
     if (isAvailable) {
         formGroup.classList.remove('invalid');
