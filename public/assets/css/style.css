@@ -2993,12 +2993,11 @@ body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
 
 /* Indicatori di validazione */
 .input-wrapper::after {
-        content: "";
-        position: absolute;
-        right: 50px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+    content: "";
+    position: absolute;
+    right: 190px;
+    top: 40%;
+}
     
 
 
