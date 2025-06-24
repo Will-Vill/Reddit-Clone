@@ -96,6 +96,19 @@ Profilo di {{ $info->username }}
         </div>
     </div>
 </div>
+
+<footer id="footer-telefono">
+    <p>Sito creato da William Villari</p>
+  </footer>
+
+  <div id="immagine-modale" class="modale-immagine nascosto">
+    <span class="chiudi-modale">&times;</span>
+    <img class="contenuto-modale" id="img-modale">
+    <div class="didascalia-modale"></div>
+  </div>
+@endsection
+
+@section('footer')
 @endsection
 
 @push('scripts')
