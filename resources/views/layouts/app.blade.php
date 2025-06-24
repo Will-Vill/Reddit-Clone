@@ -37,7 +37,7 @@
                   <span class="nome-utente-display">{{ session('username', 'Utente') }}</span>
                 </div>
                 <div class="menu-utente-body">
-                  <a href="{{-- route('profile') --}}" class="menu-link profilo_utente-link">Profilo Utente</a>
+                  <a href="{{ route('profiloUtente') }}" class="menu-link profilo_utente-link">Profilo Utente</a>
                   <a href="{{ route('logout') }}" class="menu-link logout-link">Logout</a>
                 </div>
               </div>
