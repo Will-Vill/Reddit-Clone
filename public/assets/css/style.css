@@ -2930,7 +2930,7 @@ body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
 
   .profilo-contenuto-speciale {
         overflow-y: auto;
-        max-height: calc(100vh - 50px);
+        max-height: 100vh;
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
