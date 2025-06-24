@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class ApiController extends Controller
 {
@@ -94,5 +96,100 @@ class ApiController extends Controller
         curl_close($ch);
 
         return $response;
+    }
+
+    public function infoProfiloUtente(){
+        if (!session('id')){
+            error_log("Accesso non autorizzato: utente non autenticato.");
+            return redirect('/login');
+        }
+        $user_id = session('id');
+
+        $info = DB::table('utenti')
+                        ->select('username', 'avatar', 'bio', 'data_registrazione', 'email')
+                        ->where('id', $user_id)
+                        ->first();
+
+        $commentiTotali = DB::table('commenti')
+                            ->where('user_id', $user_id)
+                            ->count();
+
+        if (empty($info) && $commentiTotali === 0) {
+            error_log("Nessun profilo trovato per l'utente con ID: {$user_id}");
+            return redirect('/login');
+        }
+
+        return view('profilo_utente', [
+            'info' => $info,
+            'commentiTotali' => $commentiTotali
+        ]);
+    }
+
+    public function aggiornaProfilo(Request $request){
+        if(!session('id')){
+            return response()->json([
+                'success' => false,
+                'message' => 'Utente non autenticato. Accesso negato.'
+            ]);
+        }
+
+        $user_id = session('id');
+        $response = [
+            'success' => false,
+            'message' => 'Nessuna operazione richiesta o dati non validi.',
+            'updated_fields' => [
+                'bio' => false,
+                'password' => false
+            ],
+            'new_bio_html' => null,
+            'require_logout' => false
+        ];
+
+        $updateData = [];
+
+        if($request->has('bio')){
+            $bio_trim = trim($request->input('bio'));
+            $updateData['bio'] = $bio_trim;
+            $response['updated_fields']['bio'] = true;
+            $response['new_bio_html'] = $bio_trim ? nl2br(htmlspecialchars($bio_trim)) : '<em>Nessuna biografia impostata.</em>';
+        }
+
+        if($request->filled('password')){
+            $password = $request->input('password');
+            $request->validate([
+                'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()]
+            ]);
+            $updateData['password'] = password_hash($password, PASSWORD_BCRYPT);
+            $response['updated_fields']['password'] = true;
+        }
+
+        if(!empty($updateData)){
+            $updated = DB::table('utenti')
+                            ->where('id', $user_id)
+                            ->update($updateData);
+            
+            if($updated){
+                $response['success'] = true;
+                $messages = [];
+                if($response['updated_fields']['bio']) $messages[] = "Bio";
+                if($response['updated_fields']['password']) $messages[] = "Password";
+                if(count($messages) > 0){
+                    $response['message'] = implode(" e ", $messages) . (count($messages) > 1 ? " aggiornate" : " aggiornata") . " con successo.";
+                } else {
+                    $response['message'] = "Profilo aggiornato con successo.";
+                }
+                if($response['updated_fields']['password']){
+                    $response['message'] .= " Per motivi di sicurezza, è necessario effettuare nuovamente il login. Sarai reindirizzato alla pagina di login.";
+                    $response['require_logout'] = true;
+                    session()->flush();
+                } 
+            } else {
+                $response['success'] = true;
+                $response['message'] = "Nessuna modifica effettuata (valori già presenti).";
+            }
+        } else {
+            $response['message'] = 'Nessun dato valido fornito per l\'aggiornamento o password non valida.';
+        }
+        return response()->json($response);
     }
 }
