@@ -2930,7 +2930,7 @@ body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
 
   .profilo-contenuto-speciale {
         overflow-y: auto;
-        max-height: calc(100vh - 100px);
+        max-height: calc(100vh - 50px);
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
@@ -2948,14 +2948,22 @@ body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
     }
 
     .tab-content {
-        max-height: calc(100vh - 10px);
         overflow-y: auto;
         background: #2a2a2a;
         border-radius: 12px;
         padding: 10px;
         margin-bottom: 20px;
-        scrollbar-width: thin;
-        scrollbar-color: #404040 #2a2a2a;
+        scrollbar-width: none; 
+        -ms-overflow-style: none;
+    }
+
+    .tab-content::-webkit-scrollbar {
+        display: none;
+    }
+
+    .benvenuto-container {
+        padding: 40px 20px;
+        min-height: 200px;
     }
 
     .benvenuto-container {
