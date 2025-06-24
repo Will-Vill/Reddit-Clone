@@ -429,6 +429,16 @@ body.tema-chiaro .pulsante-subreddit:hover {
     background-color: #d0d0d0;
 }
 
+body.tema-chiaro .input-wrapper.invalid input {
+    border: 2px solid #ff4040;
+    background-color: #f8d7da;
+}
+
+body.tema-chiaro .input-wrapper.valid input {
+    border: 2px solid #1a8917;
+    background-color: #d4edda;
+}
+
 .container {
     display: flex;
     flex-direction: row;
