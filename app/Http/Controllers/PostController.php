@@ -119,7 +119,7 @@ class PostController extends Controller
             $tipo_contenuto = $immagine_path ? 'image' : ($url ? 'link' : 'text');
 
             $inserisci_query = DB::insert('INSERT INTO post (user_id, reddit_id, subreddit, titolo, autore, contenuto, tipo_contenuto, url, thumbnail, voto, immagine_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-            [$user_id, $reddit_id, $subreddit, $titolo, $autore, $contenuto, $tipo_contenuto, $url, $thumbnail, $voto_attuale_post, $immagine_path]);
+            [null, $reddit_id, $subreddit, $titolo, $autore, $contenuto, $tipo_contenuto, $url, $thumbnail, $voto_attuale_post, $immagine_path]);
 
             if($inserisci_query){
                 $post_id = DB::getPdo()->lastInsertId();
@@ -136,7 +136,9 @@ class PostController extends Controller
         $tipo_differenza_voto = $tipo_voto_utente - $tipo_voto_utente_precedente;
         $nuovo_voto_post = $voto_attuale_post + $tipo_differenza_voto;
 
-        if($voto_esistente){
+        if($tipo_voto_utente == 0){
+            DB::delete('DELETE FROM voti_utenti WHERE user_id = ? AND post_id = ?', [$user_id, $post_id]);
+        } else if($voto_esistente){
             DB::update('UPDATE voti_utenti SET tipo_voto = ? WHERE user_id = ? AND post_id = ?',[$tipo_voto_utente, $user_id, $post_id]);
         } else {
             DB::insert('INSERT INTO voti_utenti (user_id, post_id, tipo_voto) VALUES (?, ?, ?)', [$user_id, $post_id, $tipo_voto_utente]);
