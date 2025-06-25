@@ -25,7 +25,7 @@ Profilo di {{ $info->username }}
             <section class="sezione-main">
                 <h3>Post con cui hai interagito</h3>
                 <p class="info-testo">Visualizza tutti i post con cui hai interagito</p>
-                <a href="interazioni_post.php" class="btn-salva btn-interazioni-link">🔄 Visualizza le Mie Interazioni</a>
+                <a href="{{ route('interazioniPost') }}" class="btn-salva btn-interazioni-link">🔄 Visualizza le Mie Interazioni</a>
             </section>
         </div>
 
@@ -82,11 +82,11 @@ Profilo di {{ $info->username }}
                         <label for="password">Cambio password:</label>
                         <div class="input-wrapper">
                             <input type="password" id="password" name="password" placeholder="Nuova password (opzionale)">
-                            <span class="toggle-password-visibility2" data-target="password">👁️</span>
+                            <span class="toggle-password-visibility" data-target="password">👁️</span>
                         </div>
                         <div class="input-wrapper">
                             <input type="password" id="confirm_password" name="password_confirmation" placeholder="Conferma nuova password (opzionale)">
-                            <span class="toggle-password-visibility2" data-target="confirm_password">👁️</span>
+                            <span class="toggle-password-visibility" data-target="confirm_password">👁️</span>
                         </div>
                     </div>
                     <button type="submit" class="btn-salva">💾 Salva Modifiche</button>
@@ -114,4 +114,5 @@ Profilo di {{ $info->username }}
 @push('scripts')
 <script src="{{ asset('assets/js/main.js') }}" defer></script>
 <script src="{{ asset('assets/js/profilo.js') }}" defer></script>
+<script src="{{ asset('assets/js/toggle-password.js') }}" defer></script>
 @endpush
