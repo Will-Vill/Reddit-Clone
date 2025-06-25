@@ -48,6 +48,8 @@ Route::get('/post_recenti', [PostController::class, 'postRecenti']);
 
 // Rotte per profiloUtente
 Route::get('/profilo_utente', [HomeController::class, 'profiloUtente'])->name('profiloUtente');
-Route::get('/profilo_utente', [ApiController::class, 'infoProfiloUtente'])->name('profiloUtente');
 Route::post('/aggiorna_profilo', [ApiController::class, 'aggiornaProfilo']);
+
+// Rotte per interazioni_post profilo
+Route::get('/interazioni_post', [HomeController::class, 'interazioniPost'])->name('interazioniPost');
 
