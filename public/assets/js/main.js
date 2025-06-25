@@ -1213,3 +1213,9 @@ function caricaPostRecenti(data, pulsante) {
     listaPostRecenti.appendChild(li);
   }
 }
+
+const sezioneMain = document.getElementById('sezione-main-interazioni');
+if(sezioneMain) {
+    sezioneMain.innerHTML = '<div class="loading-message">⏳ Caricamento dei post...</div>';
+    PostDatabase(sezioneMain);
+}
