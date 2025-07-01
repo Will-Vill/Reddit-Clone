@@ -53,3 +53,6 @@ Route::post('/aggiorna_profilo', [ApiController::class, 'aggiornaProfilo']);
 // Rotte per interazioni_post profilo
 Route::get('/interazioni_post', [HomeController::class, 'interazioniPost'])->name('interazioniPost');
 
+// Rotte per crea_post
+Route::get('/crea_post', [PostController::class, 'creaPostPagina'])->name('creaPostPagina');
+Route::post('/crea_post', [PostController::class, 'creaPost'])->name('creaPost');
