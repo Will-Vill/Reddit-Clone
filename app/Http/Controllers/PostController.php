@@ -281,22 +281,42 @@ class PostController extends Controller
         return view('crea_post');
     }
 
-    /*public function creaPost(Request $request){
+    public function creaPost(Request $request){
         if(!session('id')){
-            return response()->json(['success' => false, 'error' => "Utente non autenticato"], 401);
+            return redirect()->route('login')->with('error', 'Devi effettuare il login per creare un post.');
         }
 
         $user_id = session('id');
+        $username = session('username');
 
-        $request->validate([
+        $datiValidati = $request->validate([
             "titolo" => ["required", "min:5" ,"max:100"],
+            "subreddit" => ["required"],
+            "tipo_contenuto" => ["required", "in:text,image"],
+            "contenuto_testo" => ['required_if:tipo_contenuto,text', 'nullable', 'string'],
+            "contenuto_immagine" => ['required_if:tipo_contenuto,image', 'nullable', 'image', 'mimes:jpeg,jpg,png', 'max:5120'],
+        ]);
 
+        $db_contenuto_finale = null;
+        $db_immagine_path = null;
 
+        if($datiValidati['tipo_contenuto'] === 'image'){
+            $path = $request->file('contenuto_immagine')->store('uploads', 'public');
+            $db_immagine_path = 'storage/' . $path;
+        } else {
+            $db_contenuto_finale = $datiValidati['contenuto_testo'];
+        }
 
+        $reddit_id_generato = "usr_" . uniqid();
 
+        $query_inserimento = DB::insert("INSERT INTO post (user_id, reddit_id, subreddit, titolo, autore, contenuto, tipo_contenuto, immagine_path, voto, data_salvataggio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [$user_id, $reddit_id_generato, $datiValidati['subreddit'], $datiValidati['titolo'], $username, $db_contenuto_finale, $datiValidati['tipo_contenuto'], $db_immagine_path, 0, now()]);
 
-        ])
-    }*/
-
-
+        if($query_inserimento){
+            return redirect()->route('postSingolo', ['reddit_id' => $reddit_id_generato])->with('success', 'Post creato con successo!');
+        } else {
+            error_log("Errore durante la creazione del post.");
+            return back()->withInput()->with('error', 'Errore durante la creazione del post.');
+        }
+    }
 }
