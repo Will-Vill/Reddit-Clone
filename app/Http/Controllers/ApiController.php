@@ -122,9 +122,17 @@ class ApiController extends Controller
 
         if($request->has('bio')){
             $bio_trim = trim($request->input('bio'));
+            if(!empty($bio_trim)) {
+                if(strlen($bio_trim) > 150){
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'La biografia non può superare i 150 caratteri.',
+                    ]);
+                }
             $updateData['bio'] = $bio_trim;
             $response['updated_fields']['bio'] = true;
             $response['new_bio_html'] = $bio_trim ? nl2br(htmlspecialchars($bio_trim)) : '<em>Nessuna biografia impostata.</em>';
+            }
         }
 
         if($request->filled('password')){
