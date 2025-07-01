@@ -273,5 +273,30 @@ class PostController extends Controller
         return response()->json(['success' => true, 'post' => $posts]);
     }
 
+    public function creaPostPagina(){
+        if(!session('id')){
+            return redirect()->route('login');
+        }
+
+        return view('crea_post');
+    }
+
+    /*public function creaPost(Request $request){
+        if(!session('id')){
+            return response()->json(['success' => false, 'error' => "Utente non autenticato"], 401);
+        }
+
+        $user_id = session('id');
+
+        $request->validate([
+            "titolo" => ["required", "min:5" ,"max:100"],
+
+
+
+
+
+        ])
+    }*/
+
 
 }
