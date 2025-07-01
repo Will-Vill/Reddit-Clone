@@ -6,21 +6,14 @@ if(document.querySelector(".form-creazione-post")) {
 
 function inizializzaCreaPost() {
     const radioTipoContenuto = document.querySelectorAll('input[name="tipo_contenuto"]');
-    var contenitoriRadio = document.querySelectorAll('.form-group > div');
-
-    for (var i = 0; i < contenitoriRadio.length; i++) {
-        contenitoriRadio[i].addEventListener('click', handleClick);
+    
+    // Non serve più il gestore di click sul div, basta quello sul radio
+    for (const radio of radioTipoContenuto) {
+        radio.addEventListener('change', aggiornaVisibilitaCampiContenuto);
     }
     
-    if (radioTipoContenuto.length === 0) {
-        return;
-    }
-    
-    for (var i = 0; i < radioTipoContenuto.length; i++) {
-        radioTipoContenuto[i].addEventListener('change', aggiornaVisibilitaCampiContenuto);
-    }
-    
-    aggiornaVisibilitaCampiContenuto();
+    // NON chiamare più la funzione al caricamento, perché Blade ha già fatto il lavoro.
+    // aggiornaVisibilitaCampiContenuto(); 
 }
 
 function handleClick() {
@@ -33,35 +26,16 @@ function handleClick() {
 }
 
 function aggiornaVisibilitaCampiContenuto() {
-    
-    var tipoSelezionato = document.querySelector('input[name="tipo_contenuto"]:checked');
-    var campoTesto = document.getElementById('campo_contenuto_testo');
-    var campoImmagine = document.getElementById('campo_contenuto_immagine');
+    const tipoSelezionato = document.querySelector('input[name="tipo_contenuto"]:checked').value;
+    const campoTesto = document.getElementById('campo_contenuto_testo');
+    const campoImmagine = document.getElementById('campo_contenuto_immagine');
 
-    var tuttiiContenitori = document.querySelectorAll('.form-group > div');
-    for (var i = 0; i < tuttiiContenitori.length; i++) {
-        tuttiiContenitori[i].classList.remove('radio-selected');
-    }
-    
-    if (campoTesto) campoTesto.style.display = 'none';
-    if (campoImmagine) campoImmagine.style.display = 'none';
-    
-    if (!tipoSelezionato) {
-        console.log('Nessun radio button selezionato');
-        return;
-    }
-
-    var contenitoreSelezionato = tipoSelezionato.closest('div');
-    if (contenitoreSelezionato) {
-        contenitoreSelezionato.classList.add('radio-selected');
-    }
-    
-    var valoreSelezionato = tipoSelezionato.value;
-    console.log('Tipo selezionato:', valoreSelezionato);
-    
-    if (valoreSelezionato === 'text' && campoTesto) {
+    // La logica ora è più semplice: mostra uno e nascondi l'altro.
+    if (tipoSelezionato === 'text') {
         campoTesto.style.display = 'block';
-    } else if (valoreSelezionato === 'image' && campoImmagine) {
+        campoImmagine.style.display = 'none';
+    } else {
+        campoTesto.style.display = 'none';
         campoImmagine.style.display = 'block';
     }
 }
