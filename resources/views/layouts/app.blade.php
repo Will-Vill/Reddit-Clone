@@ -24,7 +24,7 @@
             <input type="text" class="ricerca-input" placeholder="Cerca su Reddit">
           </span>
           <span class="pulsanti">
-            <a href="{{-- route('posts.create') --}}" class="pulsante-crea-post">Crea Post</a>
+            <a href="{{ route('creaPostPagina') }}" class="pulsante-crea-post">Crea Post</a>
             <a href="https://github.com/williamvil1" class="pulsante-github" target="_blank">Git Hub</a>
             <button id="tema-toggle" class="pulsante-tema" aria-label="Cambia tema">
               <span class="icona-tema">☀️</span>
@@ -45,7 +45,7 @@
             <div class="menu-mobile-container">
               <button class="pulsante-menu-mobile">☰</button>
               <div class="dropdown-menu nascosto">
-                <a href="{{-- route('posts.create') --}}" class="pulsante-crea-post-mobile">Crea Post</a>
+                <a href="{{ route('creaPostPagina') }}" class="pulsante-crea-post-mobile">Crea Post</a>
                 <a href="https://github.com/williamvil1" class="pulsante-github-mobile" target="_blank">GitHub</a>
               </div>
             </div>
