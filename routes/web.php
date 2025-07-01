@@ -35,7 +35,7 @@ Route::post('/post_voto', [PostController::class, 'postVoto']);
 Route::get('/post_iniziali', [PostController::class, 'postInizialiDB']);
 
 // Rotta per postSingolo
-Route::get('/post_singolo/reddit/{reddit_id}', [PostController::class, 'recuperaPostSingolo']);
+Route::get('/post_singolo/reddit/{reddit_id}', [PostController::class, 'recuperaPostSingolo'])->name('postSingolo');
 
 // Rotta per postUtenti
 Route::get('/post_utenti', [PostController::class, 'postUtenti']);
