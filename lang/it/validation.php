@@ -4,8 +4,14 @@ return [
     'email'    => 'Devi inserire un indirizzo email valido.',
     'confirmed'=> 'La conferma della password non corrisponde.',
 
+    'required_if' => 'Questo campo è obbligatorio quando :other è :value.',
+
+    'contenuto_testo' => 'contenuto del testo',
+    'contenuto_immagine' => 'immagine',
+    'tipo_contenuto' => 'tipo di contenuto',
+
     'min' => [
-        'string' => 'La password deve contenere almeno :min caratteri.',
+        'string' => 'Il campo :attribute deve contenere almeno :min caratteri.',
     ],
 
     'max' => [
