@@ -204,7 +204,6 @@ input[type="file"].form-control:hover {
     transition: all 0.3s ease;
     overflow: hidden;
     opacity: 1;
-    max-height: 150px;
 }
 
 .campo-contenuto-dinamico[style*="display: none"] {
