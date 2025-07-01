@@ -3,20 +3,19 @@ const formStatus = {
   confirmPassword: true,
 };
 
-
-
-
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
 const benvenutoIniziale = document.getElementById('benvenuto-iniziale');
-
-
-
+const formModificaProfilo = document.getElementById('form-modifica-profilo');
+const messaggioAggiornamento = document.getElementById('messaggio-aggiornamento-profilo');
+const passwordInput = document.getElementById('password');
+const confirmPasswordInput = document.getElementById('confirm_password');
+const bioInput = document.getElementById('nuova-bio');
+const bioDisplay = document.querySelector('.bio-display');
 
 for (const content of tabContents) {
   content.classList.remove('active');
 }
-
 
 for (const button of tabButtons) {
     button.addEventListener('click', gestioneTab);
@@ -55,14 +54,13 @@ function gestioneTab(event) {
     }
 }
 
+if (passwordInput) {
+    passwordInput.addEventListener('blur', checkPassword);
+}
 
-
-
-
-document.getElementById('password').addEventListener('blur', checkPassword);
-document.getElementById('confirm_password').addEventListener('blur', checkConfirmPassword);
-
-
+if (confirmPasswordInput) {
+    confirmPasswordInput.addEventListener('blur', checkConfirmPassword);
+}
 
 function checkPassword(event) {
     const passwordInput = event.currentTarget;
@@ -73,8 +71,8 @@ function checkPassword(event) {
     if (passwordInput.value === '') {
         formGroup.classList.remove('invalid', 'valid');
         formStatus.password = true;
-     if (document.getElementById('confirm_password').value === '') {
-        document.getElementById('confirm_password').parentNode.classList.remove('invalid', 'valid');
+     if (confirmPasswordInput.value === '') {
+        confirmPasswordInput.parentNode.classList.remove('invalid', 'valid');
         formStatus.confirmPassword = true;
      }
      return;
@@ -93,10 +91,10 @@ function checkPassword(event) {
 function checkConfirmPassword(event) {
     const confirm_passwordInput = event.currentTarget;
     const formGroup = confirm_passwordInput.parentNode;
-    const password = document.getElementById('password').value;
+    const password = passwordInput.value;
     const confirm_password = confirm_passwordInput.value;
 
-   if (confirm_passwordInput.value === '' && document.getElementById('password').value === '') {
+   if (confirm_passwordInput.value === '' && passwordInput.value === '') {
         formGroup.classList.remove('invalid', 'valid');
         formStatus.confirmPassword = true;
         return;
@@ -112,156 +110,80 @@ function checkConfirmPassword(event) {
     }
 }
 
-const formModificaProfilo = document.getElementById('form-modifica-profilo');
-const messaggioAggiornamento = document.getElementById('messaggio-aggiornamento-profilo');
-const passwordInputGlobal = document.getElementById('password');
-const confirmPasswordInputGlobal = document.getElementById('confirm_password');
-
-
-
 if(formModificaProfilo) {
     formModificaProfilo.addEventListener('submit', checkDati);
 }
 
-
 async function checkDati(event) {
     event.preventDefault();
-    if (passwordInputGlobal.value !== '' || confirmPasswordInputGlobal.value !== '') {
-        checkPassword({ currentTarget: passwordInputGlobal });
-        checkConfirmPassword({ currentTarget: confirmPasswordInputGlobal });
-    } else {
-        formStatus.password = true;
-        formStatus.confirmPassword = true;
-        passwordInputGlobal.parentNode.classList.remove('invalid', 'valid');
-        confirmPasswordInputGlobal.parentNode.classList.remove('invalid', 'valid');
-    }
-    const passwordCheckValid = !Object.values(formStatus).includes(false);
-
-    const currentBioValue = document.getElementById('nuova-bio').value;
-    const checkBioChanged = currentBioValue.trim() !== '';
-    const checkPasswordCambiate = passwordInputGlobal.value !== '' || confirmPasswordInputGlobal.value !== '';
-
-    let smthChanged = checkBioChanged || checkPasswordCambiate;
-
-    if (!passwordCheckValid && checkPasswordCambiate) {
-        if (messaggioAggiornamento) {
+        
+    if (passwordInput.value !== '' || confirmPasswordInput.value !== '') {
+        const passwordValid = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,30}$/.test(passwordInput.value);
+        const confirmValid = passwordInput.value === confirmPasswordInput.value;
+        
+        formStatus.password = passwordValid;
+        formStatus.confirmPassword = confirmValid;
+        
+        if (!passwordValid || !confirmValid) {
             messaggioAggiornamento.textContent = 'Password non valida. Controlla e riprova.';
             messaggioAggiornamento.className = 'messaggio-aggiornamento error';
-        }
-        return;
-    }
-
-    if (smthChanged) {
-        if (messaggioAggiornamento) {
-            messaggioAggiornamento.textContent = 'Salvataggio in corso...';
-            messaggioAggiornamento.className = 'messaggio-aggiornamento neutral';
-        }
-
-        const formData = new FormData(formModificaProfilo);
-
-        if (formData.get('password') === '' && formStatus.password === true) {
-            formData.delete('password');
-            formData.delete('conferma_password');
-        }
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-        try {
-            const response = await fetch("/aggiorna_profilo", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            body: formData
-        })
-        const jsonData = await checkDatiOnResponse(response);
-        aggiornaProfilo(jsonData);
-        } catch(error) {
-            console.error('Errore durante l\'invio del form:', error);
-            if (messaggioAggiornamento) {
-                let errorMessage = 'Si è verificato un errore imprevisto.';
-                if (error.response && error.response.errors) {
-                    // Estrai e unisci tutti i messaggi di errore
-                    errorMessage = Object.values(error.response.errors).flat().join('\n');
-                } else if (error.message) {
-                    errorMessage = error.message;
-                }
-                messaggioAggiornamento.textContent = errorMessage;
-                messaggioAggiornamento.className = 'messaggio-aggiornamento error';
-            }
-        }
-    }
-}
-
-
-async function checkDatiOnResponse(response) {
-    if (!response.ok) {
-        const errorData = await response.json();
-        const error = new Error('Errore di validazione dal server.');
-        error.response = errorData;
-        throw error;
-    }
-    return response.json();
-}
-
-
-function aggiornaProfilo(data) {
-
-    if (messaggioAggiornamento) {
-        messaggioAggiornamento.textContent = data.message || 'Operazione completata.';
-        messaggioAggiornamento.className = data.success ? 'messaggio-aggiornamento success' : 'messaggio-aggiornamento error';
-    }
-
-    if (data.success) {
-        const nuovaBioTextarea = document.getElementById('nuova-bio');
-        console.log("Dati aggiornati:", data);
-
-        if (data.updated_fields && data.updated_fields.bio) {
-            const bioDisplayElement = document.querySelector('#tab-informazioni .info-valore.bio-display');
-            if (bioDisplayElement) {
-                if (data.new_bio_html !== null && data.new_bio_html !== undefined) {
-                    bioDisplayElement.innerHTML = data.new_bio_html;
-                } else {
-                    bioDisplayElement.innerHTML = '<em>Nessuna biografia impostata.</em>';
-                }
-            }
-            if (nuovaBioTextarea) {
-                nuovaBioTextarea.value = '';
-            }
-        }
-        
-        if (data.updated_fields && data.updated_fields.password) {
-            const passwordInputGlobal = document.getElementById('password');
-            const confirmPasswordInputGlobal = document.getElementById('confirm_password');
-            if (passwordInputGlobal) passwordInputGlobal.value = '';
-            if (confirmPasswordInputGlobal) confirmPasswordInputGlobal.value = '';
-            if (passwordInputGlobal && passwordInputGlobal.parentNode) passwordInputGlobal.parentNode.classList.remove('valid', 'invalid');
-            if (confirmPasswordInputGlobal && confirmPasswordInputGlobal.parentNode) confirmPasswordInputGlobal.parentNode.classList.remove('valid', 'invalid');
-            formStatus.password = true;
-            formStatus.confirmPassword = true;
-        }
-
-        if (data.require_logout) {
-            setTimeout(redirectToIndex, 2000);
             return;
         }
-    } else {
-        console.error("Errore dall'API:", data.message);
+    }
+
+    const BioCambiata = bioInput.value.trim() !== '';
+    const PasswordCambiata = passwordInput.value !== '';
+    
+    if (!BioCambiata && !PasswordCambiata) return;
+
+    messaggioAggiornamento.textContent = 'Salvataggio in corso...';
+    messaggioAggiornamento.className = 'messaggio-aggiornamento neutral';
+
+    const formData = new FormData(formModificaProfilo);
+    if (formData.get('password') === '') {
+        formData.delete('password');
+        formData.delete('password_confirmation');
+    }
+    
+    try {
+        const response = await fetch("/aggiorna_profilo", {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: formData
+        });
+        
+        const data = await onResponse(response);
+        
+        messaggioAggiornamento.textContent = data.message || 'Operazione completata.';
+        messaggioAggiornamento.className = data.success ? 'messaggio-aggiornamento success' : 'messaggio-aggiornamento error';
+        
+        if (data.success) {
+            if (data.updated_fields?.bio && bioDisplay) {
+                bioDisplay.innerHTML = data.new_bio_html || '<em>Nessuna biografia impostata.</em>';
+                bioInput.value = '';
+            }
+            
+            if (data.updated_fields?.password) {
+                passwordInput.value = '';
+                confirmPasswordInput.value = '';
+                passwordInput.parentNode.classList.remove('valid', 'invalid');
+                confirmPasswordInput.parentNode.classList.remove('valid', 'invalid');
+            }
+            
+            if (data.require_logout) {
+                setTimeout(() => window.location.href = '/login', 2000);
+                return;
+            }
+        }
+    } catch(error) {
+        console.error('Errore durante l\'invio del form:', error);
+        messaggioAggiornamento.textContent = 'Si è verificato un errore imprevisto.';
+        messaggioAggiornamento.className = 'messaggio-aggiornamento error';
     }
 }
 
-
-
-function redirectToIndex() {
-    window.location.href = '/index';
-}
-
-
-function escapeHTML(str) {
-    if (str === null || str === undefined) return '';
-    return str.toString()
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+function onResponse(response) {
+    return response.json();
 }
