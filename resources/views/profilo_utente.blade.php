@@ -76,7 +76,7 @@ Profilo di {{ $info->username }}
                 <form id="form-modifica-profilo" class="form-modifica" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="nuova-bio">Aggiungi/modifica biografia:</label>
-                        <textarea id="nuova-bio" name="bio" rows="4" placeholder="Scrivi qualcosa su di te..."></textarea>
+                        <textarea id="nuova-bio" name="bio" rows="4" placeholder="Scrivi qualcosa su di te..." maxlength="150"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="password">Cambio password:</label>
