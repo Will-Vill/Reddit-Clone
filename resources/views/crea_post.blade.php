@@ -16,6 +16,9 @@ Profilo di {{ session('username') }}
                 <div class="form-group">
                     <label for="titolo">Titolo:</label>
                     <input type="text" name="titolo" id="titolo" class="form-control" value="{{ old('titolo') }}" required>
+                    @error('titolo')
+                        <p class="error"> {{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="form-group">
@@ -40,14 +43,11 @@ Profilo di {{ session('username') }}
                         <input type="radio" name="tipo_contenuto" id="tipo_testo" value="text" @checked(old('tipo_contenuto', 'text') === 'text')>
                         <label for="tipo_testo">Testo</label>
                     </div>
-                    @error('tipo_testo')
-                        <p class="error"> {{ $message }}</p>
-                    @enderror
                     <div>
-                        <input type="radio" name="tipo_contenuto" id="tipo_immagine" value="image" @checked(old('tipo_immagine', 'image') === 'image')>
+                        <input type="radio" name="tipo_contenuto" id="tipo_immagine" value="image" @checked(old('tipo_contenuto') === 'image')>
                         <label for="tipo_immagine">Immagine</label>
                     </div>
-                    @error('tipo_immagine')
+                    @error('tipo_contenuto')
                         <p class="error"> {{ $message }}</p>
                     @enderror
                 </div>
