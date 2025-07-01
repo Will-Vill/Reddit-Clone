@@ -8,6 +8,10 @@ return [
         'string' => 'La password deve contenere almeno :min caratteri.',
     ],
 
+    'max' => [
+        'string' => 'Questo campo non può contenere più di :max caratteri.',
+    ],
+
     'password' => [
         'min'       => 'La password deve contenere almeno :min caratteri.',
         'mixed'     => 'La password deve contenere almeno una lettera maiuscola e una minuscola.',
