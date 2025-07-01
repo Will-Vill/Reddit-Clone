@@ -29,7 +29,7 @@ Profilo di {{ session('username') }}
                         <option value="sports" @if(old('subreddit') == 'sports') selected @endif>Sport</option>
                         <option value="anime" @if(old('subreddit') == 'anime') selected @endif>Anime</option>
                         <option value="movies" @if(old('subreddit') == 'movies') selected @endif>Film</option>
-                        <option value="music" @if(old('subreddit') == 'music') selected @endif>Musica</option>
+                        <option value="Music" @if(old('subreddit') == 'Music') selected @endif>Musica</option>
                         <option value="science" @if(old('subreddit') == 'science') selected @endif>Scienze</option>
                     </select>
                     @error('subreddit')
