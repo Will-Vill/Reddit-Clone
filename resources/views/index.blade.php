@@ -54,7 +54,7 @@
           <span class="icona-informazioni">
             <img src="{{ asset('assets/images/informazioni.png') }}" alt="Informazioni">
           </span>
-          <a href="">Informazioni</a>
+          <a href="{{ route('Informazioni') }}">Informazioni</a>
         </h4>
       </div>
       <footer id="footer-pagina_principale">
