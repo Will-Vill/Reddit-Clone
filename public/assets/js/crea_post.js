@@ -10,6 +10,8 @@ function inizializzaCreaPost() {
     for (const radio of radioTipoContenuto) {
         radio.addEventListener('change', aggiornaVisibilitaCampiContenuto);
     }
+
+    aggiornaVisibilitaCampiContenuto();
 }
 
 function aggiornaVisibilitaCampiContenuto() {
