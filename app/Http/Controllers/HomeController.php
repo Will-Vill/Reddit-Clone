@@ -47,4 +47,11 @@ class HomeController extends Controller
         }
         return view('interazioni_post');
     }
+
+    public function informazioniPagina(){
+        if(!session('id')){
+            return redirect()->route('login');
+        }
+        return view('/informazioni');
+    }
 }
