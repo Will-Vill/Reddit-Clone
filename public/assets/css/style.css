@@ -14,6 +14,8 @@ h2, h3, h4, h5, p{
   --colore-principale-hover: #e24e00;
   --colore-accent: #FF3200;
   --colore-hover: rgba(255, 255, 255, 0.1);
+  --form-bg: #1a1a1b;
+  --form-border: #343536;
 }
 
 .container, .home-link, #div-informazioni, #footer-pagina_principale, #footer-telefono, 
@@ -2306,7 +2308,6 @@ body.tema-chiaro .password-feedback.warning {
 
 .info-label {
     font-weight: 500;
-    color: var(--colore-testo-primario);
     flex-basis: 150px;
     flex-shrink: 0;
 }
@@ -2396,6 +2397,59 @@ body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
     border: 1px solid #f5c6cb;
 }
 
+/* Parte Informazioni */
+
+.container-informazioni {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.contenuto-principale-informazioni {
+    max-width: 900px;
+    width: 90%;
+    margin: 25px;
+    padding: 35px 45px;
+    background-color: var(--form-bg);
+    border: 1px solid var(--form-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+}
+
+.titolo-informazioni {
+    font-size: 2.4em;
+    color: var(--colore-principale);
+    text-align: center;
+    margin-bottom: 48px;
+    margin-top: 0;
+    letter-spacing: 1px;
+}
+
+.contenuto-principale-informazioni p,
+.contenuto-principale-informazioni ul {
+    margin-bottom: 35px;
+    font-size: 1.15em;
+    color: #f3f3f3;
+}
+
+.contenuto-principale-informazioni ul li {
+    margin-bottom: 24px;
+    padding-left: 8px;
+    position: relative;
+}
+
+.contenuto-principale-informazioni h2 {
+    font-size: 2.4em;
+    color: var(--colore-principale);
+    text-align: center;
+    margin-bottom: 38px;
+    margin-top: 0;
+    letter-spacing: 1px;
+}
 
 
 
