@@ -56,3 +56,6 @@ Route::get('/interazioni_post', [HomeController::class, 'interazioniPost'])->nam
 // Rotte per crea_post
 Route::get('/crea_post', [PostController::class, 'creaPostPagina'])->name('creaPostPagina');
 Route::post('/crea_post', [PostController::class, 'creaPost'])->name('creaPost');
+
+// Rotta per Informazioni
+Route::get('/informazioni', [HomeController::class, 'informazioniPagina'])->name('Informazioni');
