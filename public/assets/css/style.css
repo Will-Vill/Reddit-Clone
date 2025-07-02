@@ -277,9 +277,11 @@ body.tema-chiaro {
   body.tema-chiaro .link-informazioni a {
     color: #1a1a1a;
 }
+
+body.tema-chiaro .link-informazioni a:hover {
+    color: #FF5700;
+}
   
-  body.tema-chiaro .post-info h3,
-  body.tema-chiaro .titolo-post,
   body.tema-chiaro .corpo-post p,
   body.tema-chiaro .titolo-commenti,
   body.tema-chiaro #footer-pagina_principale {
@@ -2351,12 +2353,17 @@ body.tema-chiaro .password-feedback.warning {
   color: inherit;
 }
 
+body.tema-chiaro a.titolo-post-link,
+body.tema-chiaro .post-info h3 a.titolo-post-link,
 body.tema-chiaro .header-post .post-info a.titolo-post-link {
-   color: #333;
+    color: #333;
+    transition: color 0.2s ease;
 }
 
+body.tema-chiaro a.titolo-post-link:hover,
+body.tema-chiaro .post-info h3 a.titolo-post-link:hover,
 body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
-   color: #FF5700;
+    color: #FF5700 !important;
 }
 
 .titolo-post-link.non-cliccabile {
