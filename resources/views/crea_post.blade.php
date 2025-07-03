@@ -6,6 +6,9 @@
 Profilo di {{ session('username') }}
 @endsection
 
+@section('ricerca')
+@endsection
+
 @section('content')
 <main class="container">
         <div class="contenuto-principale form-creazione-post">
