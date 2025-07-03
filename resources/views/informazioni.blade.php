@@ -11,16 +11,16 @@ Profilo di {{ session('username') }}
     <div class="contenuto-principale-informazioni">
         <h1 class="titolo-informazioni">Informazioni sul sito</h1>
             <p class="testo-informazioni">
-                Questo progetto è una replica di Reddit dove è possibile visualizzare, commentare, votare i Post recuperati da Reddit e crearne altri
+                Questo progetto è una replica funzionale di Reddit, una piattaforma dove è possibile visualizzare, commentare e votare post di vario genere. Gli utenti possono interagire con contenuti recuperati direttamente da Reddit e creare i propri contributi originali, arricchendo così l'esperienza di community.
             </p>
             <ul>
-                <li><strong>Crea post:</strong> Condividi pensieri, immagini o notizie.</li>
-                <li><strong>Vota:</strong> Metti upvote o downvote ai post che preferisci</li>
-                <li><strong>Interagisci:</strong> Commenta e interagisci con altri utenti</li>
+                <li><strong>Crea post:</strong> Condividi pensieri, immagini e notizie su argomenti di tuo interesse.</li>
+                <li><strong>Vota:</strong> Esprimi la tua opinione con upvote e downvote, contribuendo a evidenziare i contenuti più apprezzati dalla community.</li>
+                <li><strong>Interagisci:</strong> Commenta i post, partecipa alle discussioni e connettiti con altri utenti che condividono i tuoi interessi.</li>
             </ul>
             <h2>Come funziona?</h2>
             <p>
-                Inizia dalla pagina principale scegli un subreddit. Inizia a pubblicare post puoi creare immagini o scrivere post di testo. Ogni post può essere votato e commentato da altri utenti.
+                Esplora la pagina principale e scegli un subreddit tematico che ti interessa. Puoi navigare tra i contenuti esistenti oppure creare nuovi post: hai la possibilità di condividere testi informativi o caricare immagini. Ogni contributo può essere valutato e commentato dalla community.
             </p>
             <h2>Contatti</h2>
             <p>
