@@ -59,3 +59,6 @@ Route::post('/crea_post', [PostController::class, 'creaPost'])->name('creaPost')
 
 // Rotta per Informazioni
 Route::get('/informazioni', [HomeController::class, 'informazioniPagina'])->name('Informazioni');
+
+// Rotta per ricerca
+Route::get('/ricerca', [PostController::class, 'ricercaPost'])->name('Ricerca');
