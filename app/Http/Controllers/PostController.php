@@ -319,4 +319,25 @@ class PostController extends Controller
             return back()->withInput()->with('error', 'Errore durante la creazione del post.');
         }
     }
+
+    public function ricercaPost(Request $request){
+        $query = $request->input('q');
+
+        if(!$query || strlen($query) < 2){
+            return redirect()->back()->with('error', 'Inserisci almeno due caratteri per la ricerca');
+        }
+
+        $risultati = DB::table('post')
+                        ->where('titolo', 'LIKE', "%{$query}%")
+                        ->orWhere('contenuto', 'LIKE', "%{$query}%")
+                        ->orderBy('data_salvataggio', 'desc')
+                        ->paginate(10);
+
+
+        return view('/ricerca', [
+            'risultati' => $risultati,
+            'query' => $query
+        ]
+        );
+    }
 }
