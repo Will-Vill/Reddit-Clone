@@ -20,9 +20,13 @@
               <a href="{{ route('index') }}">reddit</a>
             </h3>
           </div>
+        @section('ricerca')
           <span class="ricerca">
-            <input type="text" class="ricerca-input" placeholder="Cerca su Reddit">
+            <form action="{{ route('Ricerca') }}" method="GET">
+              <input type="text" name="q" class="ricerca-input" placeholder="Cerca su Reddit">
+            </form>
           </span>
+        @show
           <span class="pulsanti">
             <a href="{{ route('creaPostPagina') }}" class="pulsante-crea-post">Crea Post</a>
             <a href="https://github.com/williamvil1" class="pulsante-github" target="_blank">Git Hub</a>
