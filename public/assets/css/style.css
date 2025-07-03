@@ -104,6 +104,12 @@ header {
     padding-right: 35px;
 }
 
+.ricerca form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .reset-ricerca {
     position: absolute;
     right: 80px;
@@ -2449,6 +2455,48 @@ body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
     margin-bottom: 38px;
     margin-top: 0;
     letter-spacing: 1px;
+}
+
+/* Parte Ricerca */
+
+.ricerca-container {
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.contenuto-principale-ricerca {
+    display: flex;
+    flex-direction: column;
+    padding: 35px 45px;
+    max-width: 900px;
+    width: 90%;
+}
+
+.contenuto-principale-ricerca h1 {
+    font-size: 2.4em;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.contenuto-principale-ricerca p,
+.contenuto-principale-ricerca ul {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 1.15em;
+    color: #f3f3f3;
+}
+
+.contenuto-principale-ricerca ul {
+    padding-left: 0;
+    list-style-position: inside;
+}
+
+.contenuto-principale-ricerca .utente-post-ricerca {
+    text-align: left;
+    width: 100%;
+    font-size: 0.9em;
+    color: #777;
 }
 
 
