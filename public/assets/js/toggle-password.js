@@ -13,7 +13,7 @@ function checkPasswordVisibility(event) {
 }
 
 
-const toggle_passwords = document.querySelectorAll('.toggle-password-visibility');
+const toggle_passwords = document.querySelectorAll('.toggle-password-visibility, .toggle-password-visibility2');
 for(const toggle_password of toggle_passwords) {
     toggle_password.addEventListener('click',checkPasswordVisibility);
 }

@@ -82,11 +82,11 @@ Profilo di {{ $info->username }}
                         <label for="password">Cambio password:</label>
                         <div class="input-wrapper">
                             <input type="password" id="password" name="password" placeholder="Nuova password (opzionale)">
-                            <span class="toggle-password-visibility" data-target="password">👁️</span>
+                            <span class="toggle-password-visibility2" data-target="password">👁️</span>
                         </div>
                         <div class="input-wrapper">
                             <input type="password" id="confirm_password" name="password_confirmation" placeholder="Conferma nuova password (opzionale)">
-                            <span class="toggle-password-visibility" data-target="confirm_password">👁️</span>
+                            <span class="toggle-password-visibility2" data-target="confirm_password">👁️</span>
                         </div>
                     </div>
                     <button type="submit" class="btn-salva">💾 Salva Modifiche</button>
