@@ -1395,6 +1395,11 @@ body.tema-chiaro .downvote:hover {
 .form-group {
   margin-bottom: 20px;
   position: relative;
+  text-align: center;
+}
+
+body.tema-chiaro .form-group label{
+  color: #343536;
 }
 
 .form-group label {
