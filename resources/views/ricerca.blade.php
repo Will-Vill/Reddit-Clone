@@ -18,7 +18,7 @@
             <p>Nessun risultato trovato per "{{ $query }}".</p>
             <p>Suggerimenti:</p>
             <ul>
-                <li>Controlla l'ortografia delle parole</li>
+                <li>Controlla attentamente l'ortografia</li>
                 <li>Prova a usare parole chiave diverse</li>
                 <li>Prova a cercare termini più generici</li>
             </ul>
