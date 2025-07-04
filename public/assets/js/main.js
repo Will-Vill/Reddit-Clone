@@ -887,7 +887,6 @@ function mostraPostDatabase(arrayDeiPost, containerDestinazione) {
         postElement.className = "post";
         postElement.dataset.source = "database";
 
-        const idPerLink = datiPostSingolo.post_db_id;
         const redditIdOriginale = datiPostSingolo.reddit_id;
 
         postElement.dataset.dbId = datiPostSingolo.post_db_id || '';
