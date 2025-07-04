@@ -301,8 +301,8 @@ class PostController extends Controller
         $db_immagine_path = null;
 
         if($datiValidati['tipo_contenuto'] === 'image'){
-            $path = $request->file('contenuto_immagine')->store('uploads', 'public');
-            $db_immagine_path = 'storage/' . $path;
+            $path = $request->file('contenuto_immagine')->store('uploads', 'public'); // salva il file in uploads/nomefile.estensione 
+            $db_immagine_path = 'storage/' . $path; // storage/uploads/nomefile.estensione
         } else {
             $db_contenuto_finale = $datiValidati['contenuto_testo'];
         }

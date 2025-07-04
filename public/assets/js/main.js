@@ -870,7 +870,7 @@ for(const pulsanteGeneraAI of pulsantiGeneraAI)
 
 
 
-// Parte profilo_utente.php
+// Per interazioni profilo utente e per caricamento post iniziali
 
 function mostraPostDatabase(arrayDeiPost, containerDestinazione) {
     containerDestinazione.innerHTML = '';
