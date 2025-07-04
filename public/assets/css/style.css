@@ -2499,7 +2499,37 @@ body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
     color: #777;
 }
 
+/* Parte Paginazione */
 
+.flex.items-center.justify-between a {
+    color: #FF5700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.flex.items-center.justify-between a:hover {
+    color: #FF3200;
+}
+
+.flex.items-center.justify-between span.cursor-default {
+    color: #818384;
+}
+
+body.tema-chiaro .flex.items-center.justify-between a {
+    color: #FF5700;
+}
+
+body.tema-chiaro .flex.items-center.justify-between a:hover {
+    color: #FF3200;
+}
+
+body.tema-chiaro .flex.items-center.justify-between span.cursor-default {
+    color: #999;
+}
+
+body.tema-chiaro .font-medium {
+    color: #333;
+}
 
 
 
