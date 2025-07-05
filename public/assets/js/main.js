@@ -1018,12 +1018,11 @@ function mostraPostDatabase(arrayDeiPost, containerDestinazione) {
 
         const tipoVotoUtenteNumerico = parseInt(datiPostSingolo.tipo_voto_utente, 10);
 
-        if (!isNaN(tipoVotoUtenteNumerico)) {
-            if (tipoVotoUtenteNumerico === 1) {
-                if(nuovoPulsanteUpvote) nuovoPulsanteUpvote.classList.add('votato');
-            } else if (tipoVotoUtenteNumerico === -1) {
-                if(nuovoPulsanteDownvote) nuovoPulsanteDownvote.classList.add('votato');
-            }
+
+        if(tipoVotoUtenteNumerico === 1) {
+          if(nuovoPulsanteUpvote) nuovoPulsanteUpvote.classList.add('votato');
+        } else if (tipoVotoUtenteNumerico === -1) {
+          if(nuovoPulsanteDownvote) nuovoPulsanteDownvote.classList.add('votato');
         }
         
         const nuovaImmagine = postElement.querySelector('.immagine-post');
