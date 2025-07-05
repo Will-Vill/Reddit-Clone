@@ -63,7 +63,7 @@ Profilo di {{ session('username') }}
                     @enderror
                 </div>
 
-                <div class="form-group campo-contenuto-dinamico" data-tipo="image" id="campo_contenuto_immagine" style="display:none;">
+                <div class="form-group campo-contenuto-dinamico" data-tipo="image" id="campo_contenuto_immagine">
                     <label for="contenuto_immagine">Carica Immagine:</label>
                     <input type="file" name="contenuto_immagine" id="contenuto_immagine" class="form-control" accept="image/jpeg, image/png, image/gif">
                     @error('contenuto_immagine')
