@@ -125,8 +125,7 @@ textarea.form-control {
     overflow: hidden;
 }
 
-.form-group > div:has(input[type="radio"]:checked),
-.form-group > div.radio-selected {
+.form-group > div:has(input[type="radio"]:checked) {
     background-color: rgba(255, 87, 0, 0.15);
     border-color: var(--radio-accent);
     box-shadow: 0 6px 20px rgba(255, 87, 0, 0.25);
@@ -156,13 +155,6 @@ textarea.form-control {
     font-size: 1.1em;
 }
 
-.form-group input[type="radio"]#tipo_link + label::before {
-    content: "🔗";
-    position: absolute;
-    left: 0;
-    font-size: 1.1em;
-}
-
 .form-group input[type="radio"]#tipo_immagine + label::before {
     content: "🖼️";
     position: absolute;
@@ -170,15 +162,13 @@ textarea.form-control {
     font-size: 1.1em;
 }
 
-.form-group > div:has(input[type="radio"]:checked) label,
-.form-group > div.radio-selected label {
+.form-group > div:has(input[type="radio"]:checked) label {
     color: var(--radio-accent);
     font-weight: 700;
     font-size: 1.05em;
 }
 
-.form-group > div:has(input[type="radio"]:checked)::after,
-.form-group > div.radio-selected::after {
+.form-group > div:has(input[type="radio"]:checked)::after {
     content: "✓";
     position: absolute;
     right: 12px;
@@ -301,6 +291,12 @@ body.tema-chiaro .form-creazione-post {
     --radio-accent: #FF5700;
 }
 
+body.tema-chiaro .form-control {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-color);
+}
+
 body.tema-chiaro .form-group > div {
     background-color: #f8f9fa;
     border-color: #ddd;
@@ -311,8 +307,7 @@ body.tema-chiaro .form-group > div:hover {
     border-color: rgba(255, 87, 0, 0.6);
 }
 
-body.tema-chiaro .form-group > div:has(input[type="radio"]:checked),
-body.tema-chiaro .form-group > div.radio-selected {
+body.tema-chiaro .form-group > div:has(input[type="radio"]:checked) {
     background-color: rgba(255, 87, 0, 0.12);
     border-color: var(--radio-accent);
 }
