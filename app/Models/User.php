@@ -9,13 +9,18 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-     
-      @var string
+    /**
+     * La tabella associata al modello.
+     *
+     * @var string
+     */
     protected $table = 'utenti';
 
-    
-     
-      @var bool
+    /**
+     * Attiva i timestamps (true è il valore predefinito)
+     *
+     * @var bool
+     */
     public $timestamps = true;
     
     const CREATED_AT = 'data_registrazione';
