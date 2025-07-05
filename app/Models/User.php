@@ -9,26 +9,17 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * La tabella associata al modello.
-     *
-     * @var string
-     */
+     
+      @var string
     protected $table = 'utenti';
 
-    /**
-     * Attiva i timestamps (true è il valore predefinito)
-     *
-     * @var bool
-     */
+    
+     
+      @var bool
     public $timestamps = true;
     
-    /**
-     * Mappa data_registrazione come created_at
-     */
     const CREATED_AT = 'data_registrazione';
     
-    // Il resto del tuo modello rimane invariato
     protected $fillable = [
         'username',
         'email',
