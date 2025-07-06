@@ -69,8 +69,8 @@ INSERT INTO utenti (username, password, email, avatar, bio, is_admin)
 VALUES (
     'will',
     '$2y$10$.e5qFQsmVSfvzL4PUa.RO.B/Inh/e8UnGwLO7USaSXI5epFCOO6Je',
-    '1337',
+    'prova@gmail.com',
     '/assets/images/img.png',
-    '1337',
+    'test bio',
     TRUE
 );
