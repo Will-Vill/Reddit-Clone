@@ -160,7 +160,7 @@ async function checkDati(event) {
         messaggioAggiornamento.className = data.success ? 'messaggio-aggiornamento success' : 'messaggio-aggiornamento error';
         
         if (data.success) {
-            if (data.updated_fields?.bio && bioDisplay) {
+            if (data.updated_fields?.bio && bioDisplay) { // controlla anche se data.updated_fields è vero
                 bioDisplay.innerHTML = data.new_bio_html || '<em>Nessuna biografia impostata.</em>';
                 bioInput.value = '';
             }
