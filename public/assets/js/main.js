@@ -291,12 +291,19 @@ function cambioTema() {
   {
     document.body.classList.remove('tema-chiaro');
     tema.querySelector('.icona-tema').textContent = '☀️';
+    localStorage.setItem('tema', 'scuro');
   } 
   else 
   {
     document.body.classList.add('tema-chiaro');
     tema.querySelector('.icona-tema').textContent = '🌙';
+    localStorage.setItem('tema', 'chiaro');
   }
+}
+
+if(localStorage.getItem('tema') === 'chiaro') {
+  document.body.classList.add('tema-chiaro');
+  tema.querySelector('.icona-tema').textContent = '🌙';
 }
 
 
@@ -320,12 +327,8 @@ async function inviaCommento(event)
   const textArea = testoCommento.value;
 
   let postElement;
-  if (document.body.contains(document.querySelector('article.post.post-singolo'))) { // Siamo in post_singolo.php
+  if (document.body.contains(document.querySelector('article.post.post-singolo'))) { // Siamo in post_singolo
       postElement = document.querySelector('article.post.post-singolo');
-  } else {
-      const postFooter = aggiungiCommento.parentNode; 
-      const sezioneCommenti = postFooter.parentNode; 
-      postElement = sezioneCommenti.parentNode; 
   }
 
   if(textArea === '')
