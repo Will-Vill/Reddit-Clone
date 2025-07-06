@@ -2008,6 +2008,10 @@ body.tema-chiaro .loading-message {
     color: #666;
 }
 
+#nuova-bio {
+    resize: none;
+}
+
 /* Form modifica profilo */
 .form-modifica {
   max-width: 600px;
@@ -2460,6 +2464,20 @@ body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
     margin-bottom: 38px;
     margin-top: 0;
     letter-spacing: 1px;
+}
+
+body.tema-chiaro .contenuto-principale-informazioni {
+    background-color: white;
+    border-color: #ddd;
+}
+
+body.tema-chiaro .contenuto-principale-informazioni p,
+body.tema-chiaro .contenuto-principale-informazioni ul {
+    color: #333;
+}
+
+body.tema-chiaro .titolo-informazioni {
+    color: #FF5700;
 }
 
 /* Parte Ricerca */
