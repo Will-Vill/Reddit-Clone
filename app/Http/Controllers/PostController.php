@@ -56,7 +56,7 @@ class PostController extends Controller
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        return ($httpcode === 200) ? $data : false;
+        return ($httpcode === 200) ? $data : false; // $data sono i dati binari dell'immagine
     }
 
     public function postVoto(Request $request){
@@ -95,7 +95,7 @@ class PostController extends Controller
                     $img = imagecreatefromstring($image_data); // crea una risorsa immagine
 
                     if($img != false){
-                        $salva_path = tempnam(sys_get_temp_dir(), 'upload');
+                        $salva_path = tempnam(sys_get_temp_dir(), 'upload'); // crea un file temporaneo in una cartella temporanea e salva il percorso in salva_path
 
                         if (in_array($estensione, ['jpeg', 'jpg'])){
                             imagejpeg($img, $salva_path, 75); // salva l'immagine jpg sul disco comprimendola del 75 %
@@ -104,10 +104,10 @@ class PostController extends Controller
                         } else {
                             error_log("Formato immagine non supportato: $estensione");
                         }
-                        imagedestroy($img);
+                        imagedestroy($img); // libera memoria
 
                         $percorsoStorage = 'uploads/' . $nome_file;
-                        Storage::disk('public')->put($percorsoStorage, file_get_contents($salva_path));
+                        Storage::disk('public')->put($percorsoStorage, file_get_contents($salva_path)); // prende il contenuto del file temporaneo salva_path e lo salva
                         unlink($salva_path);
 
                         $immagine_path = 'storage/' . $percorsoStorage;
@@ -116,7 +116,14 @@ class PostController extends Controller
                     }
                 }
             }
-            $tipo_contenuto = $immagine_path ? 'image' : ($url ? 'link' : 'text');
+
+            if($immagine_path){
+                $tipo_contenuto = 'image';
+            } elseif ($url){
+                $tipo_contenuto = 'link';
+            } else {
+                $tipo_contenuto = 'text';
+            }
 
             $inserisci_query = DB::insert('INSERT INTO post (user_id, reddit_id, subreddit, titolo, autore, contenuto, tipo_contenuto, url, thumbnail, voto, immagine_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
             [null, $reddit_id, $subreddit, $titolo, $autore, $contenuto, $tipo_contenuto, $url, $thumbnail, $voto_attuale_post, $immagine_path]);
@@ -130,7 +137,11 @@ class PostController extends Controller
         }
 
         $voto_esistente = DB::selectOne('SELECT tipo_voto FROM voti_utenti WHERE user_id = ? AND post_id = ?', [$user_id, $post_id]);
-        $tipo_voto_utente_precedente = $voto_esistente ? intval($voto_esistente->tipo_voto) : 0;
+        if($voto_esistente){
+            $tipo_voto_utente_precedente = intval($voto_esistente);
+        } else {
+            $tipo_voto_utente_precedente = 0;
+        }
 
 
         $tipo_differenza_voto = $tipo_voto_utente - $tipo_voto_utente_precedente;
