@@ -92,19 +92,19 @@ class PostController extends Controller
                     $estensione = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION);
                     $nome_file = 'img_' . uniqid() . '.' . $estensione;
 
-                    $img = imagecreatefromstring($image_data); // crea una risorsa immagine
+                    $img = imagecreatefromstring($image_data);
 
                     if($img != false){
-                        $salva_path = tempnam(sys_get_temp_dir(), 'upload'); // crea un file temporaneo in una cartella temporanea e salva il percorso in salva_path
+                        $salva_path = tempnam(sys_get_temp_dir(), 'upload');
 
                         if (in_array($estensione, ['jpeg', 'jpg'])){
-                            imagejpeg($img, $salva_path, 75); // salva l'immagine jpg sul disco comprimendola del 75 %
+                            imagejpeg($img, $salva_path, 75);
                         } elseif ($estensione === 'png'){
-                            imagepng($img, $salva_path, 6); // salva l'immagine png sul disco livello di compressione 6 per png
+                            imagepng($img, $salva_path, 6);
                         } else {
                             error_log("Formato immagine non supportato: $estensione");
                         }
-                        imagedestroy($img); // libera memoria
+                        imagedestroy($img);
 
                         $percorsoStorage = 'uploads/' . $nome_file;
                         Storage::disk('public')->put($percorsoStorage, file_get_contents($salva_path)); // prende il contenuto del file temporaneo salva_path e lo salva
