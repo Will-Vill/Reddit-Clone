@@ -57,7 +57,7 @@ Profilo di {{ session('username') }}
 
                 <div class="form-group campo-contenuto-dinamico" data-tipo="text" id="campo_contenuto_testo">
                     <label for="contenuto_testo">Contenuto Testo:</label>
-                    <textarea name="contenuto_testo" id="contenuto_testo" rows="5" class="form-control">{{ old('contenuto_testo') }}</textarea>
+                    <textarea name="contenuto_testo" id="contenuto_testo" rows="5" class="form-control" maxlength="500">{{ old('contenuto_testo') }}</textarea>
                     @error('contenuto_testo')
                         <p class="error"> {{ $message }}</p>
                     @enderror
