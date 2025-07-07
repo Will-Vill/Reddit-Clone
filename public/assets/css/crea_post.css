@@ -277,6 +277,10 @@ input[type="file"].form-control:hover {
     text-align: center;
 }
 
+#contenuto_testo {
+    resize: none;
+}
+
 body.tema-chiaro .form-creazione-post {
     --form-bg: #ffffff;
     --form-border: #e0e0e0;
