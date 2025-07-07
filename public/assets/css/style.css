@@ -1895,6 +1895,11 @@ body.tema-chiaro .logout-link:hover {
   color: var(--colore-testo);
 }
 
+body.tema-chiaro .tab-button:hover {
+  background: rgba(255, 87, 0, 0.1);
+  color: #333;
+}
+
 .tab-button.active {
   background-color: var(--colore-principale);
   color: white;
@@ -2432,7 +2437,7 @@ body.tema-chiaro .header-post .post-info a.titolo-post-link:hover {
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     max-height: calc(100vh - 50px);
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 .titolo-informazioni {
@@ -2520,6 +2525,15 @@ body.tema-chiaro .titolo-informazioni {
     width: 100%;
     font-size: 0.9em;
     color: #777;
+}
+
+body.tema-chiaro .contenuto-principale-ricerca h1 {
+    color: #333;
+}
+
+body.tema-chiaro .contenuto-principale-ricerca p,
+body.tema-chiaro .contenuto-principale-ricerca ul {
+    color: #666;
 }
 
 /* Parte Paginazione */
