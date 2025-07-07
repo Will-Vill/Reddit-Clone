@@ -138,7 +138,7 @@ class PostController extends Controller
 
         $voto_esistente = DB::selectOne('SELECT tipo_voto FROM voti_utenti WHERE user_id = ? AND post_id = ?', [$user_id, $post_id]);
         if($voto_esistente){
-            $tipo_voto_utente_precedente = intval($voto_esistente);
+            $tipo_voto_utente_precedente = intval($voto_esistente->tipo_voto);
         } else {
             $tipo_voto_utente_precedente = 0;
         }
@@ -304,7 +304,7 @@ class PostController extends Controller
             "titolo" => ["required", "min:5" ,"max:100"],
             "subreddit" => ["required"],
             "tipo_contenuto" => ["required", "in:text,image"],
-            "contenuto_testo" => ['required_if:tipo_contenuto,text', 'nullable', 'string'],
+            "contenuto_testo" => ['required_if:tipo_contenuto,text', 'nullable', 'string', 'max:500'],
             "contenuto_immagine" => ['required_if:tipo_contenuto,image', 'nullable', 'image', 'mimes:jpeg,jpg,png', 'max:5120'],
         ]);
 
