@@ -1754,7 +1754,7 @@ body.tema-chiaro .logout-link:hover {
 /* Parte profilo utente */
 
 .benvenuto-container {
-  background: linear-gradient(120deg, #23272e 80%, #ff5700 100%);
+  background: #23272e;
   border-radius: 20px;
   padding: 90px 40px 80px 40px;
   text-align: center;
@@ -2149,7 +2149,7 @@ body.tema-chiaro .form-modifica textarea {
 }
 
 body.tema-chiaro .benvenuto-container {
-  background: linear-gradient(120deg, #f8f8f8 80%, #ff5700 100%);
+  background: #f8f8f8;
   border-color: #ff5700;
   box-shadow: 0 8px 32px rgba(0,0,0,0.08);
 }
