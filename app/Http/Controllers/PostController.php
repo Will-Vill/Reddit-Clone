@@ -315,7 +315,7 @@ class PostController extends Controller
             $path = $request->file('contenuto_immagine')->store('uploads', 'public'); // salva il file in uploads/nomefile.estensione 
             $db_immagine_path = 'storage/' . $path; // storage/uploads/nomefile.estensione
         } else {
-            $db_contenuto_finale = $datiValidati['contenuto_testo'];
+            $db_contenuto_finale = htmlspecialchars($datiValidati['contenuto_testo'], ENT_QUOTES, 'UTF-8');
         }
 
         $reddit_id_generato = "usr_" . uniqid();
