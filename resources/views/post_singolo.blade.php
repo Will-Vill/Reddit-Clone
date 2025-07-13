@@ -101,7 +101,7 @@
                                     <div class="commenti-info">
                                         <h3 class="autore-commento">{{ $commento->username }}</h3>
                                         <span class="data-commento-inline">{{ \Carbon\Carbon::parse($commento->data_commento)->format('d/m/Y H:i') }}</span>
-                                        <p class="testo-commento">{!! nl2br($commento->contenuto) !!}</p>
+                                        <p class="testo-commento">{!! nl2br(e($commento->contenuto)) !!}</p>
                                     </div>
                                 </div>
                             </div>
