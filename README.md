@@ -12,21 +12,21 @@ A Reddit-inspired web application built with PHP (Laravel), MariaDB, designed to
 
 The Web Application presents as shown in this first image with the login page protected with Javascript and backend protection.
 
-After the register/login the idex page shows initially a blank page because there aren't posts downloaded.
+After registering/logging in, the index page is initially empty since no posts have been downloaded yet.
 
 <img width="1253" height="1253" alt="Screenshot da 2026-09-02 08-46-30" src="https://github.com/user-attachments/assets/60fb304e-ac36-4e51-ac4f-4288480a5a9e" />
 
-At the left we can see some subreddits, with a reddit API key and client ID if you click on them it will recover the lasts 10 post of that subreddit and show it on the page. If you want to download that certain post on your database you have to comment or like/dislike the post. After that the post is in your database, with an image if needed.
+On the left you can see a list of subreddits (fetched using a Reddit API key and client ID). Clicking on one retrieves the last 10 posts from that subreddit and displays them on the page. To save a specific post to your database, comment on it or like/dislike it.
 
-You can create posts with text/images 
+You can create posts with text/images.
 
 <img width="1253" height="1253" alt="Screenshot da 2026-09-02 09-10-43" src="https://github.com/user-attachments/assets/b293b7be-4c4f-4bab-bf83-5bedc716a976" />
 
-This one is an example of a post with only text and a comment. All this information are saved in the database.
+This one is an example of a post with only text and a comment. All this information is saved in the database.
 
 <img width="1253" height="1253" alt="Screenshot da 2026-09-02 09-11-17" src="https://github.com/user-attachments/assets/7264c457-f3da-48d5-a402-d5e9c25cfabe" />
 
-This is the main page with 2 posts
+This is the main page with 2 posts.
 
 <img width="1253" height="1253" alt="Screenshot da 2026-09-02 09-15-51" src="https://github.com/user-attachments/assets/7d8b8a49-d949-4d44-903c-e4ace9a6b4ab" />
 
@@ -47,12 +47,16 @@ mariadb -u root < sql/Sql.sql
 ```bash
 composer install
 npm install
+cp .env.example .env
+```
+Then edit your .env file with your database credentials, and run:
+```bash
 php artisan key:generate
 ```
 
 ### 3. Start Local Servers
 
-Backed Laravel
+Backend Laravel
 ```bash
 php artisan serve
 ```
@@ -61,7 +65,7 @@ Frontend Vite
 ```bash
 npm run dev
 ```
-Open your browser and navigate to ```http://localhost:8000```
+Open your browser and navigate to `http://localhost:8000`
 
 > Note: All the images and the Web Application routes are in Italian.
 
