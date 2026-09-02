@@ -1,6 +1,6 @@
 # Reddit Clone (Full-Stack Web Application)
 
-A Reddit-inspired web application built with PHP (Laravel), MariaDB, designed to manage communities, posts, comments, and user authentication.
+> A Reddit-inspired web application built with PHP (Laravel), MariaDB, designed to manage communities, posts, comments, and user authentication.
 
 ## Tech Stack
 
