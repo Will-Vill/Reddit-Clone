@@ -30,7 +30,7 @@
         @show
           <span class="pulsanti">
             <a href="{{ route('creaPostPagina') }}" class="pulsante-crea-post">Crea Post</a>
-            <a href="https://github.com/williamvil1" class="pulsante-github" target="_blank">Git Hub</a>
+            <a href="https://github.com/Will-Vill" class="pulsante-github" target="_blank">Git Hub</a>
             <button id="tema-toggle" class="pulsante-tema" aria-label="Cambia tema">
               <span class="icona-tema">☀️</span>
             </button>
