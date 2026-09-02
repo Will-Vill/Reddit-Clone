@@ -1,61 +1,68 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Reddit Clone (Full-Stack Web Application)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Reddit-inspired web application built with PHP (Laravel), MariaDB, designed to manage communities, posts, comments, and user authentication.
 
-## About Laravel
+## Tech Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white) ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white) ![MariaDB](https://img.shields.io/badge/MariaDB-03589C?style=for-the-badge&logo=mariadb&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🧠 Architecture
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<img width="1253" height="1253" alt="Screenshot da 2026-09-02 08-27-36" src="https://github.com/user-attachments/assets/235c4be1-e97b-4265-a873-a90ae41cfeb2" />
 
-## Learning Laravel
+The Web Application presents as shown in this first image with the login page protected with Javascript and backend protection.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+After the register/login the idex page shows initially a blank page because there aren't posts downloaded.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<img width="1253" height="1253" alt="Screenshot da 2026-09-02 08-46-30" src="https://github.com/user-attachments/assets/60fb304e-ac36-4e51-ac4f-4288480a5a9e" />
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+At the left we can see some subreddits, with a reddit API key and client ID if you click on them it will recover the lasts 10 post of that subreddit and show it on the page. If you want to download that certain post on your database you have to comment or like/dislike the post. After that the post is in your database, with an image if needed.
 
-## Laravel Sponsors
+You can create posts with text/images 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<img width="1253" height="1253" alt="Screenshot da 2026-09-02 09-10-43" src="https://github.com/user-attachments/assets/b293b7be-4c4f-4bab-bf83-5bedc716a976" />
 
-### Premium Partners
+This one is an example of a post with only text and a comment. All this information are saved in the database.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+<img width="1253" height="1253" alt="Screenshot da 2026-09-02 09-11-17" src="https://github.com/user-attachments/assets/7264c457-f3da-48d5-a402-d5e9c25cfabe" />
 
-## Contributing
+This is the main page with 2 posts
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<img width="1253" height="1253" alt="Screenshot da 2026-09-02 09-15-51" src="https://github.com/user-attachments/assets/7d8b8a49-d949-4d44-903c-e4ace9a6b4ab" />
 
-## Code of Conduct
+## Requirements
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* **PHP:** >= 8.1 (with `pdo_mysql`, `bcmath`, and `iconv` extensions enabled)
+* **Composer** & **Node.js / NPM**
+* **MariaDB** / MySQL server
 
-## Security Vulnerabilities
+## 🚀 How to Run
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Database setup
+```bash
+mariadb -u root < sql/Sql.sql
+```
 
-## License
+### 2. Install Dependencies
+```bash
+composer install
+npm install
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Start Local Servers
+
+Backed Laravel
+```bash
+php artisan serve
+```
+
+Frontend Vite
+```bash
+npm run dev
+```
+Open your browser and navigate to ```http://localhost:8000```
+
+> Note: All the images and the Web Application routes are in Italian.
+
+
